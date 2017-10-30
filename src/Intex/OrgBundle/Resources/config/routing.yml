@@ -1,0 +1,43 @@
+intex_org_homepage:
+    path:     /
+    defaults: { _controller: IntexOrgBundle:Page:index }
+    requirements:
+             methods:  GET
+
+intex_org_user_show:
+    path:  /user/{id}
+    defaults: { _controller: IntexOrgBundle:User:show}
+    requirements:
+            methods:  GET
+            id: \d+
+
+intex_org_companies:
+    path:  /companies/
+    defaults: { _controller: IntexOrgBundle:Company:index }
+    requirements:
+            methods:  GET
+
+intex_org_company_show:
+    path: /company/{id}
+    defaults: { _controller: IntexOrgBundle:Company:show }
+    requirements:
+            methods:  GET
+
+intex_org_company_users:
+    path: /userscompany/{id}
+    defaults: { _controller: IntexOrgBundle:Company:listusers }
+    requirements:
+            methods:  GET
+
+intex_org_user_new:
+     path: /newuserincomp/{id}
+     defaults: { _controller: IntexOrgBundle:User:new }
+     requirements:
+            methods:  GET
+
+intex_org_user_create:
+      path: /createuser/{company_id}
+      defaults: { _controller: IntexOrgBundle:User:create }
+      requirements:
+            methods:  POST
+            company_id: \d+

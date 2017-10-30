@@ -1,0 +1,14 @@
+{% extends 'IntexOrgBundle::layout.html.twig' %}
+
+{% block body %}
+    <ul class="user">
+        {% for company in companies %}
+            <li>
+                <a href="{{ path('intex_org_company_show', { 'id': company.id }) }}">{{ company.name }} </a>
+            </li>
+        {% else %}
+            <p>There are no company</p>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

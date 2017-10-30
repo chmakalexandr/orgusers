@@ -1,0 +1,4 @@
+intex_org:
+    resource: "@IntexOrgBundle/Resources/config/routing.yml"
+    prefix:   /
+

@@ -1,0 +1,9 @@
+{% extends 'IntexOrgBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="show_user">
+           {{ user.lastname }}&nbsp;{{ user.firstname }} {{ user.patronymic }} {{ user.patronymic }} {{ user.bithday|date("m/d/Y")}} {{ user.company }}
+           <a href="{{ path('intex_org_company_show', { 'id': user.company.id }) }}">{{ user.company }} </a>
+    </div>
+
+{% endblock %}

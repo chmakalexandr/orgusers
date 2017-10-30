@@ -1,0 +1,14 @@
+{% extends 'IntexOrgBundle::layout.html.twig' %}
+
+{% block body %}
+    <ul class="user">
+        {% for user in users %}
+            <li>
+                <a href="{{ path('intex_org_user_show', { 'id': user.id }) }}">{{ user.lastname }}&nbsp;{{ user.firstname }} </a>
+            </li>
+        {% else %}
+            <p>There are no users</p>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

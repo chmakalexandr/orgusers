@@ -1,0 +1,10 @@
+{% extends 'IntexOrgBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="show_company">
+        {{ company.name }}&nbsp;{{ company.ogrn }} &nbsp; {{ company.oktmo }}
+        <a href="{{  path('intex_org_company_users',{ 'id': company.id })}}">Show users company</a>
+        <a href="{{  path('intex_org_user_new',{ 'id': company.id })}}">Add user in company</a>
+    </div>
+
+{% endblock %}
