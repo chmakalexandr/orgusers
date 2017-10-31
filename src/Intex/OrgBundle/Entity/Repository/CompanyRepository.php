@@ -16,8 +16,6 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
             ->select('c')
             ->addOrderBy('c.name', 'ASC');
 
-
-
         return $qb->getQuery()
             ->getResult();
     }

@@ -16,7 +16,11 @@ class CompanyController extends Controller
     {
         $em = $this->getDoctrine()
             ->getManager();
-        $companies=$em->getRepository('IntexOrgBundle:Company')->getAllCompanies();
+        $companies=$em->getRepository('IntexOrgBundle:Company')->findAll();
+
+        if (!$companies) {
+            throw $this->createNotFoundException('Unable to find company.');
+        }
         return $this->render('IntexOrgBundle:Company:index.html.twig', array(
             'companies' => $companies
         ));
@@ -37,23 +41,6 @@ class CompanyController extends Controller
         ));
 
     }
-
-    public function listusersAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $company = $em->getRepository('IntexOrgBundle:Company')->find($id);
-        $users=$company->getUsers();
-
-        if (!$company) {
-            throw $this->createNotFoundException('There are not company.');
-        }
-
-        return $this->render('IntexOrgBundle:Company:users.html.twig', array(
-            'company'  => $company,
-            'users'  => $users
-        ));
-    }
-
 
 
 }

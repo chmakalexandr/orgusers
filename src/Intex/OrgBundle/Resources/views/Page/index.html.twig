@@ -1,14 +1,16 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
 
 {% block body %}
-    <ul class="user">
-        {% for user in users %}
-            <li>
-                <a href="{{ path('intex_org_user_show', { 'id': user.id }) }}">{{ user.lastname }}&nbsp;{{ user.firstname }} </a>
-            </li>
-        {% else %}
-            <p>There are no users</p>
-        {% endfor %}
+    <ul class="navigation">
+        <li><a href="{{ path('intex_org_users') }}">Show Users</a></li>
+        <li><a href="{{ path('intex_org_companies') }}">Show Companies</a></li>
+        <li><a href="{{ path('intex_org_user_upload')}}">Upload users</a></li>
     </ul>
+
+    <pre>
+    {{ dump(users) }}
+    </pre>
+{% endblock %}
+{% block sidebar %}
 
 {% endblock %}

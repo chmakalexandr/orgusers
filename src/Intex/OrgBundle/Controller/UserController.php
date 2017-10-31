@@ -15,12 +15,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session;
 
 
+
 class UserController extends Controller
 {
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()
+            ->getManager();
+        $users = $em->getRepository('IntexOrgBundle:User')
+            ->findAll();
+        return $this->render('IntexOrgBundle:User:index.html.twig', array(
+            'users' => $users
+        ));
+    }
+
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $user = $em->getRepository('IntexOrgBundle:User')->find($id);
 
         if (!$user) {
@@ -32,10 +43,24 @@ class UserController extends Controller
         ));
     }
 
+    public function listusersAction($id)
+    {
+        $company = $this->getCompany($id);
+        $users=$company->getUsers();
+
+        if (!$users) {
+            throw $this->createNotFoundException('There are not users in this company.');
+        }
+
+        return $this->render('IntexOrgBundle:User:users.html.twig', array(
+            'company'  => $company,
+            'users'  => $users
+        ));
+    }
+
     public function newAction($id)
     {
         $company = $this->getCompany($id);
-
         $user = new User();
         $user->setCompany($company);
         $form = $this->createForm(UserType::class, $user);
@@ -64,6 +89,7 @@ class UserController extends Controller
         }
 
         return $this->render('IntexOrgBundle:User:form.html.twig', array(
+            'company' => $company,
             'form' => $form->createView()
         ));
     }
@@ -72,14 +98,13 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()
             ->getManager();
-
         $company = $em->getRepository('IntexOrgBundle:Company')->find($company_id);
-
         if (!$company) {
             throw $this->createNotFoundException('Unable to find company.');
         }
-
         return $company;
     }
+
+
 
 }

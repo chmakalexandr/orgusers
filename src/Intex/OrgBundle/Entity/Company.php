@@ -11,10 +11,19 @@ namespace Intex\OrgBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Intex\OrgBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\XmlRoot;
+use JMS\Serializer\Annotation\XmlAttribute;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\XmlList;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation as JMS;
+
 
 /**
  * @ORM\Entity(repositoryClass="Intex\OrgBundle\Entity\Repository\CompanyRepository")
  * @ORM\Table(name="company")
+ *
+ * @JMS\XmlRoot("org")
  */
 class Company
 {
@@ -29,23 +38,30 @@ class Company
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
+     * @JMS\XmlAttribute
+     * @JMS\SerializedName("displayName")
      */
     protected $name;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="bigint")
+     * @JMS\XmlAttribute
      */
     protected $ogrn;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="bigint")
+     * @JMS\XmlAttribute
      */
     protected $oktmo;
 
     /**
      * @ORM\OneToMany(targetEntity="User", mappedBy="company")
+     *
+     * @Type("ArrayCollection<Intex\OrgBundle\Entity\User>")
+     * @JMS\XmlList(inline = true, entry = "Intex\OrgBundle\Entity\User")
      */
     protected $users;
 

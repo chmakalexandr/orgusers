@@ -10,11 +10,15 @@ namespace Intex\OrgBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\XmlRoot;
+use JMS\Serializer\Annotation\XmlAttribute;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="Intex\OrgBundle\Entity\Repository\UserRepository")
  *
  * @ORM\Table(name="user")
+ * @JMS\XmlRoot("user")
  */
 class User
 {
@@ -29,37 +33,43 @@ class User
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
+     * @JMS\XmlAttribute
      */
     protected $firstname;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
+     * @JMS\XmlAttribute
      */
     protected $lastname;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
+     * @JMS\XmlAttribute
      */
-    protected $patronymic;
+    protected $middlename;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Type("\Date")
      * @ORM\Column(type="date")
+     * @JMS\XmlAttribute
      */
     protected $bithday;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="bigint")
+     * @JMS\XmlAttribute
      */
     protected $inn;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="bigint")
+     * @JMS\XmlAttribute
      */
     protected $snils;
 
@@ -121,17 +131,17 @@ class User
     /**
      * @return mixed
      */
-    public function getPatronymic()
+    public function getMiddlename()
     {
-        return $this->patronymic;
+        return $this->middlename;
     }
 
     /**
      * @param mixed $patronymic
      */
-    public function setPatronymic($patronymic)
+    public function setMiddlename($middlename)
     {
-        $this->patronymic = $patronymic;
+        $this->middlename = $middlename;
     }
 
     /**

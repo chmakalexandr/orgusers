@@ -2,8 +2,30 @@
 
 {% block body %}
     <div class="show_user">
-           {{ user.lastname }}&nbsp;{{ user.firstname }} {{ user.patronymic }} {{ user.patronymic }} {{ user.bithday|date("m/d/Y")}} {{ user.company }}
-           <a href="{{ path('intex_org_company_show', { 'id': user.company.id }) }}">{{ user.company }} </a>
+        <table>
+            <tr>
+                <td>Фамилия:</td><td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <td>Имя:</td><td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <td>Отчество:</td><td>{{ user.middlename }}</td>
+            </tr>
+            <tr>
+                <td>Дата рождения:</td><td>{{ user.bithday|date("m/d/Y")}}</td>
+            </tr>
+            <tr>
+                <td>ИНН:</td><td>{{ user.inn}}</td>
+            </tr>
+            <tr>
+                <td>СНИЛС:</td><td>{{ user.snils}}</td>
+            </tr>
+            <tr>
+                <td>Организация:</td><td><a href="{{ path('intex_org_company_show', { 'id': user.company.id }) }}">{{ user.company }} </a></td>
+            </tr>
+        </table>
+
     </div>
 
 {% endblock %}

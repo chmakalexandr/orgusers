@@ -11,6 +11,12 @@ intex_org_user_show:
             methods:  GET
             id: \d+
 
+intex_org_users:
+    path:  /users/
+    defaults: { _controller: IntexOrgBundle:User:index }
+    requirements:
+           methods:  GET
+
 intex_org_companies:
     path:  /companies/
     defaults: { _controller: IntexOrgBundle:Company:index }
@@ -25,7 +31,7 @@ intex_org_company_show:
 
 intex_org_company_users:
     path: /userscompany/{id}
-    defaults: { _controller: IntexOrgBundle:Company:listusers }
+    defaults: { _controller: IntexOrgBundle:User:listusers }
     requirements:
             methods:  GET
 
@@ -41,3 +47,14 @@ intex_org_user_create:
       requirements:
             methods:  POST
             company_id: \d+
+
+intex_org_user_upload:
+      path: /upload/
+      defaults: { _controller: IntexOrgBundle:Page:upload }
+
+
+intex_org_user_load:
+      path: /load/
+      defaults: { _controller: IntexOrgBundle:Page:load }
+      requirements:
+            methods:  POST
