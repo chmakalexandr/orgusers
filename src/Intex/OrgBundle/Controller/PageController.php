@@ -54,7 +54,7 @@ class PageController extends Controller
         */
         //$data=$request->files->get('form');
 
-        $serializer = $this->get('jms_serializer');
+        //$serializer = $this->get('jms_serializer');
 
         $doc = new Document();
 
@@ -80,7 +80,8 @@ class PageController extends Controller
 EOT;
         //$data=$request->files->get('form');
 
-        $users=$serializer->deserialize($xml, 'Intex\OrgBundle\Entity\Company', 'xml');
+        //$users=$serializer->deserialize($xml, 'Intex\OrgBundle\Entity\Company', 'xml');
+        $users=$this->get('jms_serializer')->deserialize($xml, 'Intex\OrgBundle\Entity\Company', 'xml');
         //$users = $serializer->deserialize($xml, Company::class, 'xml');
         return $this->render('IntexOrgBundle:Page:index.html.twig', array(
             'users' => $users

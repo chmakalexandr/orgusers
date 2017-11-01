@@ -10,20 +10,20 @@ namespace Intex\OrgBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation\XmlRoot;
-use JMS\Serializer\Annotation\XmlAttribute;
+
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass="Intex\OrgBundle\Entity\Repository\UserRepository")
- *
  * @ORM\Table(name="user")
- * @JMS\XmlRoot("user")
+ *
+ * @JMS\ExclusionPolicy("all")
+ *
  */
 class User
 {
     /**
-     * @Assert\NotBlank()
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -33,6 +33,8 @@ class User
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
+     *
+     * @JMS\Expose
      * @JMS\XmlAttribute
      */
     protected $firstname;
@@ -40,6 +42,8 @@ class User
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
+     *
+     * @JMS\Expose
      * @JMS\XmlAttribute
      */
     protected $lastname;
@@ -47,14 +51,17 @@ class User
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
+     *
+     * @JMS\Expose
      * @JMS\XmlAttribute
      */
     protected $middlename;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Type("\Date")
      * @ORM\Column(type="date")
+     *
+     * @JMS\Expose
      * @JMS\XmlAttribute
      */
     protected $bithday;
@@ -62,6 +69,8 @@ class User
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="bigint")
+     *
+     * @JMS\Expose
      * @JMS\XmlAttribute
      */
     protected $inn;
@@ -69,6 +78,8 @@ class User
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="bigint")
+     *
+     * @JMS\Expose
      * @JMS\XmlAttribute
      */
     protected $snils;
@@ -137,7 +148,7 @@ class User
     }
 
     /**
-     * @param mixed $patronymic
+     * @param mixed $middlename
      */
     public function setMiddlename($middlename)
     {

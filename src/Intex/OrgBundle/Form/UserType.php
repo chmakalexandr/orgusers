@@ -22,7 +22,7 @@ class UserType extends AbstractType
     {
         $builder->add('firstname');
         $builder->add('lastname');
-        $builder->add('patronymic');
+        $builder->add('middlename');
         $builder->add('bithday');
         $builder->add('inn');
         $builder->add('snils');

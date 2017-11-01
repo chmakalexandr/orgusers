@@ -24,6 +24,10 @@ class UserController extends Controller
             ->getManager();
         $users = $em->getRepository('IntexOrgBundle:User')
             ->findAll();
+
+        if (!$users) {
+            throw $this->createNotFoundException('Unable to find users.');
+        }
         return $this->render('IntexOrgBundle:User:index.html.twig', array(
             'users' => $users
         ));
@@ -48,6 +52,9 @@ class UserController extends Controller
         $company = $this->getCompany($id);
         $users=$company->getUsers();
 
+        if (!$company) {
+            throw $this->createNotFoundException('Unable to find company.');
+        }
         if (!$users) {
             throw $this->createNotFoundException('There are not users in this company.');
         }
@@ -81,10 +88,11 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isValid()&&$form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            $this->addFlash('notice','User was be added!');
             return $this->redirect($this->generateUrl('intex_org_company_users',array('id'=>$company->getId())));
         }
 
