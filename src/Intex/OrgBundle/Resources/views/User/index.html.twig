@@ -1,15 +1,17 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
 
 {% block body %}
-    <h2>Users:</h2>
-    <ul class="user">
-        {% for user in users %}
-            <li>
-                <a href="{{ path('intex_org_user_show', { 'id': user.id }) }}">{{ user.lastname }}&nbsp;{{ user.firstname }} {{ user.middlename }} </a>
-            </li>
-        {% else %}
-            <p>There are no company</p>
-        {% endfor %}
-    </ul>
+    <h3>Users:</h3>
+    <div class="users">
+        <div class="row">
+            {% for user in users %}
+                <div class="col-md-12 {{ cycle(['even', 'odd'],  loop.index0) }}">
+                        <a href="{{ path('intex_org_user_show', { 'user_id': user.id }) }}">{{ user.lastname }}&nbsp;{{ user.firstname }} {{ user.middlename }} </a>
+                </div>
+             {% else %}
+                    <p>There are no company</p>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 

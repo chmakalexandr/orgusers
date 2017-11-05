@@ -14,8 +14,8 @@
         </tr>
 
         </table>
-            <li><a href="{{  path('intex_org_company_users',{ 'id': company.id })}}">Show users company</a></li>
-            <li><a href="{{  path('intex_org_user_new',{ 'id': company.id })}}">Add user in company</a></li>
+            <li><a href="{{  path('intex_org_company_users',{ 'company_id': company.id })}}">Show company users</a></li>
+            <li><a href="{{  path('intex_org_user_new',{ 'company_id': company.id })}}">Add user in company</a></li>
             <li><a href="{{  path('intex_org_user_upload')}}">Upload users</a></li>
 
         </div>

@@ -33,10 +33,10 @@ class UserController extends Controller
         ));
     }
 
-    public function showAction($id)
+    public function showUserAction($user_id)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('IntexOrgBundle:User')->find($id);
+        $user = $em->getRepository('IntexOrgBundle:User')->find($user_id);
 
         if (!$user) {
             throw $this->createNotFoundException('Unable to find user.');
@@ -47,9 +47,9 @@ class UserController extends Controller
         ));
     }
 
-    public function listusersAction($id)
+    public function listUsersAction($company_id)
     {
-        $company = $this->getCompany($id);
+        $company = $this->getCompany($company_id);
         $users=$company->getUsers();
 
         if (!$company) {
@@ -65,27 +65,29 @@ class UserController extends Controller
         ));
     }
 
-    public function newAction($id)
+    public function newUserAction($company_id)
     {
-        $company = $this->getCompany($id);
+        $company = $this->getCompany($company_id);
+        if (!$company) {
+            throw $this->createNotFoundException('Unable to find company.');
+        }
         $user = new User();
         $user->setCompany($company);
         $form = $this->createForm(UserType::class, $user);
 
         return $this->render('IntexOrgBundle:User:form.html.twig', array(
-            'company' => $company,
+            'company_id' => $company_id,
             'form'   => $form->createView()
         ));
     }
 
-    public function createAction(Request $request, $company_id)
+    public function createUserAction(Request $request, $company_id)
     {
         $company = $this->getCompany($company_id);
         $user = new User();
         $user->setCompany($company);
 
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
 
         if ($form->isValid()&&$form->isSubmitted()) {
@@ -93,11 +95,11 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
             $this->addFlash('notice','User was be added!');
-            return $this->redirect($this->generateUrl('intex_org_company_users',array('id'=>$company->getId())));
+            return $this->redirect($this->generateUrl('intex_org_company_users',array('company_id'=>$company_id)));
         }
 
         return $this->render('IntexOrgBundle:User:form.html.twig', array(
-            'company' => $company,
+            'company_id' => $company_id,
             'form' => $form->createView()
         ));
     }
@@ -112,7 +114,4 @@ class UserController extends Controller
         }
         return $company;
     }
-
-
-
 }

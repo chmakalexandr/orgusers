@@ -1,9 +1,9 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
 
 {% block body %}
-{{ form_start(form, { 'action': path('intex_org_user_create',{'company_id':company.id}), 'method': 'POST', 'attr': {'class': 'userform'} }) }}
+    {{ form_start(form, { 'action': path('intex_org_user_create',{'company_id':company_id}), 'method': 'POST', 'attr': {'class': 'userform'} }) }}
     {{ form_widget(form) }}
-<p>
-    <input type="submit" value="Submit">
-</p>
+    <p>
+        <input type="submit" value="Submit">
+    </p>
 {% endblock %}

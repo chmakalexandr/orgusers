@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
             <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet" />
         {% endblock %}
     </head>
@@ -12,18 +12,18 @@
         <section id="wrapper">
             <header id="header">
                 <div class="top">
-                    {% block navigation %}
+                    {#{% block navigation %}
                         <nav>
                             <ul class="navigation">
                                 <li><a href="{{ path('intex_org_homepage') }}">Home</a></li>
 
                             </ul>
                         </nav>
-                    {% endblock %}
+                    {% endblock %}#}
                 </div>
-                {#<hgroup>
-                    <h2>{% block blog_title %}<a href="#"></a>{% endblock %}</h2>
-                </hgroup>#}
+                <hgroup>
+                    <h2>{% block site_title %}<a href="{{ path('intex_org_homepage') }}">Users & Organizations</a>{% endblock %}</h2>
+                </hgroup>
             </header>
 
             <section class="main-col">
@@ -39,6 +39,9 @@
                 {% endblock %}
             </div>
         </section>
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% endblock %}
     </body>
 </html>

@@ -61,6 +61,7 @@ class User
      * @Assert\NotBlank()
      * @ORM\Column(type="date")
      *
+     * @JMS\Type("DateTime<'Y-m-d','','|Y-m-d'>")
      * @JMS\Expose
      * @JMS\XmlAttribute
      */
@@ -68,8 +69,9 @@ class User
 
     /**
      * @Assert\NotBlank()
+     * @Assert\Regex("/^\d{12}$/")
      * @ORM\Column(type="bigint")
-     *
+     * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\XmlAttribute
      */
@@ -77,8 +79,9 @@ class User
 
     /**
      * @Assert\NotBlank()
+     * @Assert\Regex("/^\d{11}$/")
      * @ORM\Column(type="bigint")
-     *
+     * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\XmlAttribute
      */

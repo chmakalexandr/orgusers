@@ -5,11 +5,11 @@ intex_org_homepage:
              methods:  GET
 
 intex_org_user_show:
-    path:  /user/{id}
-    defaults: { _controller: IntexOrgBundle:User:show}
+    path:  /user/{user_id}
+    defaults: { _controller: IntexOrgBundle:User:showUser}
     requirements:
             methods:  GET
-            id: \d+
+            user_id: \d+
 
 intex_org_users:
     path:  /users/
@@ -24,37 +24,40 @@ intex_org_companies:
             methods:  GET
 
 intex_org_company_show:
-    path: /company/{id}
-    defaults: { _controller: IntexOrgBundle:Company:show }
+    path: /company/{company_id}
+    defaults: { _controller: IntexOrgBundle:Company:showCompany }
     requirements:
             methods:  GET
+            company_id: \d+
 
 intex_org_company_users:
-    path: /userscompany/{id}
-    defaults: { _controller: IntexOrgBundle:User:listusers }
+    path: /userscompany/{company_id}
+    defaults: { _controller: IntexOrgBundle:User:listUsers }
     requirements:
             methods:  GET
+            company_id: \d+
 
 intex_org_user_new:
-     path: /newuserincomp/{id}
-     defaults: { _controller: IntexOrgBundle:User:new }
+     path: /newuserincomp/{company_id}
+     defaults: { _controller: IntexOrgBundle:User:newUser }
      requirements:
             methods:  GET
+            company_id: \d+
 
 intex_org_user_create:
       path: /createuser/{company_id}
-      defaults: { _controller: IntexOrgBundle:User:create }
+      defaults: { _controller: IntexOrgBundle:User:createUser }
       requirements:
             methods:  POST
             company_id: \d+
 
 intex_org_user_upload:
       path: /upload/
-      defaults: { _controller: IntexOrgBundle:Page:upload }
+      defaults: { _controller: IntexOrgBundle:Page:uploadXml }
 
 
 intex_org_user_load:
       path: /load/
-      defaults: { _controller: IntexOrgBundle:Page:load }
+      defaults: { _controller: IntexOrgBundle:Page:loadUsers }
       requirements:
             methods:  POST

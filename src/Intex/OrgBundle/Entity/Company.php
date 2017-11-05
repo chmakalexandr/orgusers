@@ -10,9 +10,7 @@ namespace Intex\OrgBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Intex\OrgBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation as JMS;
 
 
@@ -21,7 +19,7 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\Table(name="company")
  *
  * @JMS\ExclusionPolicy("all")
- * @JMS\XmlRoot("org")
+ *
  */
 class Company
 {
@@ -45,8 +43,10 @@ class Company
 
     /**
      * @Assert\NotBlank()
+     * @Assert\Regex("/^\d{13}$/")
      * @ORM\Column(type="bigint")
      *
+     * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\XmlAttribute
      */
@@ -54,8 +54,10 @@ class Company
 
     /**
      * @Assert\NotBlank()
+     * @Assert\Regex("/^\d{11}$/")
      * @ORM\Column(type="bigint")
      *
+     * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\XmlAttribute
      */
@@ -66,7 +68,7 @@ class Company
      *
      * @JMS\Expose
      * @JMS\Type("ArrayCollection<Intex\OrgBundle\Entity\User>")
-     * @JMS\XmlList(inline = true, entry = "Intex\OrgBundle\Entity\User")
+     * @JMS\XmlList(inline=true, entry="user")
      */
     protected $users;
 

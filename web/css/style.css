@@ -12,10 +12,10 @@ body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size: 12px;
 #header ul.navigation { list-style: none; text-align: right; }
 #header .navigation li { display: inline }
 #header .navigation li a { display: inline-block; padding: 10px 15px; border-left: 1px solid #ccc; }
-#header h2 { font-family: 'Irish Grover', cursive; font-size: 92px; text-align: center; line-height: 110px; }
+#header h2 { font-family: 'Irish Grover', cursive; font-size: 42px; text-align: center; line-height: 70px; }
 #header h2 a { color: #000; }
-#header h3 { text-align: center; font-family: 'La Belle Aurore', cursive; font-size: 24px; margin-bottom: 20px; font-weight: normal; }
-
+#header h3 { text-align: center; font-family: 'La Belle Aurore', cursive; font-size: 32px; margin-bottom: 20px; font-weight: normal; color: #000000; }
+h3{font-size: 24px;}
 .main-col { width: 700px; display: inline-block; float: left; border-right: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
 .sidebar { width: 239px; padding: 10px; display: inline-block; }
 
@@ -26,3 +26,21 @@ body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size: 12px;
 .main-col p { line-height: 1.5em; margin-bottom: 20px; }
 
 #footer { border-top: 1px solid #ccc; clear: both; text-align: center; padding: 10px; color: #aaa; }
+
+.users .row{
+    background: transparent;
+    padding: 2px 0;
+}
+.users .row :nth-child(even){
+    background-color: #dcdcdc;
+    padding: 2px;
+}
+
+.users .row :nth-child(even) a{
+    background-color: #dcdcdc;
+
+}
+.users .row :nth-child(odd){
+    background-color: #aaaaaa;
+    padding: 2px;
+}

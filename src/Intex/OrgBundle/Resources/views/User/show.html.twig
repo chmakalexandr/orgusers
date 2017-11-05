@@ -22,7 +22,7 @@
                 <td>СНИЛС:</td><td>{{ user.snils}}</td>
             </tr>
             <tr>
-                <td>Организация:</td><td><a href="{{ path('intex_org_company_show', { 'id': user.company.id }) }}">{{ user.company }} </a></td>
+                <td>Организация:</td><td><a href="{{ path('intex_org_company_show', { 'company_id': user.company.id }) }}">{{ user.company }} </a></td>
             </tr>
         </table>
 
