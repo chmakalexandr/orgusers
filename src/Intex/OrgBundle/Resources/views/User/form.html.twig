@@ -1,9 +1,14 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
+{% block namepage %}
+    <h3>
+        Добавить пользователя в организацию {{ company.name}}
+    </h3>
+{% endblock %}
 
 {% block body %}
-    {{ form_start(form, { 'action': path('intex_org_user_create',{'company_id':company_id}), 'method': 'POST', 'attr': {'class': 'userform'} }) }}
+    {{ form_start(form, { 'action': path('intex_org_user_create',{'company_id':company.id}), 'method': 'POST', 'attr': {'class': 'userform'} }) }}
     {{ form_widget(form) }}
     <p>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="btn btn-default">
     </p>
 {% endblock %}

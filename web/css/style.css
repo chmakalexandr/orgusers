@@ -3,7 +3,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size: 12px; width: 100%; height: 100%; color: #000; font-size: 14px; }
 .clear { clear: both; }
 
-#wrapper { margin: 10px auto; width: 1000px; }
+#wrapper { margin: 0 auto; width: 1000px; border: 1px solid #ccc;}
 #wrapper a { text-decoration: none; color: #F48A00; }
 #wrapper span.highlight { color: #F48A00; }
 
@@ -16,8 +16,8 @@ body { line-height: 1;font-family: Arial, Helvetica, sans-serif;font-size: 12px;
 #header h2 a { color: #000; }
 #header h3 { text-align: center; font-family: 'La Belle Aurore', cursive; font-size: 32px; margin-bottom: 20px; font-weight: normal; color: #000000; }
 h3{font-size: 24px;}
-.main-col { width: 700px; display: inline-block; float: left; border-right: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
-.sidebar { width: 239px; padding: 10px; display: inline-block; }
+.main-col { width: 75%; display: inline-block; float: left; border-right: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
+.sidebar { width: 25%; ; display: inline-block; }
 
 .main-col a { color: #F48A00; }
 .main-col h1,
@@ -43,4 +43,78 @@ h3{font-size: 24px;}
 .users .row :nth-child(odd){
     background-color: #aaaaaa;
     padding: 2px;
+}
+
+#header{
+    height: 250px;
+    background: url("../images/org-header.jpg")  no-repeat;
+    background-size: 100% 100%;
+}
+
+.table.table-striped.table-hover tr{
+    cursor: pointer;
+
+}
+
+.table{
+    border: 1px solid #ccc;
+}
+
+.table-striped > tbody > tr:nth-of-type(2n+1){
+    background-color: #f3e6ac;
+}
+.table-hover>tbody>tr:hover{background-color:#dfc551}
+
+.name-col{
+    background-color: #fcf6da;
+}
+
+.sidebar li{
+    border-bottom: 1px solid #ccc;
+    margin: 0 10px;
+}
+.nav-stacked > li + li{
+    margin-left: 10px;
+    margin-top: 0;
+}
+.sidebar li:last-child{
+    border-bottom: 0;
+}
+.nav{
+    font-weight: bolder;
+}
+
+.main-col h3{
+    margin-bottom: 20px;
+}
+
+.alert{
+    margin-top: 20px;
+}
+
+.list-group{
+    height: 90%;
+    line-height: 90%;
+    text-align: center;
+}
+
+.list-group-horizontal .list-group-item {
+    display: inline-block;
+}
+.list-group-horizontal .list-group-item {
+    margin-bottom: 0;
+    margin-left:-4px;
+    margin-right: 0;
+}
+.list-group-horizontal .list-group-item:first-child {
+    border-top-right-radius:0;
+    border-bottom-left-radius:4px;
+}
+.list-group-horizontal .list-group-item:last-child {
+    border-top-right-radius:4px;
+    border-bottom-left-radius:0;
+}
+.control-label{
+    float: left;
+    padding: 5px ;
 }

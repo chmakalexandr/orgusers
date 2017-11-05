@@ -18,7 +18,8 @@ class AppKernel extends Kernel
             //new AppBundle\AppBundle(),
             new Intex\OrgBundle\IntexOrgBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle()
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

@@ -12,10 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
  * @ORM\Entity(repositoryClass="Intex\OrgBundle\Entity\Repository\CompanyRepository")
+ * @UniqueEntity(
+ *     fields={"ogrn"},
+ *     message="This organization is already exist."
+ * )
  * @ORM\Table(name="company")
  *
  * @JMS\ExclusionPolicy("all")
@@ -25,6 +30,7 @@ class Company
 {
     /**
      * @Assert\NotBlank()
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -44,7 +50,7 @@ class Company
     /**
      * @Assert\NotBlank()
      * @Assert\Regex("/^\d{13}$/")
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="bigint",unique=true)
      *
      * @JMS\Type("string")
      * @JMS\Expose

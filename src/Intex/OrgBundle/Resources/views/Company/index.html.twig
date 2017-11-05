@@ -1,15 +1,29 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
 
+{% block namepage %}
+    <h3>
+        Организации
+    </h3>
+{% endblock %}
+
 {% block body %}
-    <h3>Organizations:</h3>
-    <ul class="companies">
-        {% for company in companies %}
-            <li>
-                <a href="{{ path('intex_org_company_show', { 'company_id': company.id }) }}">{{ company.name }} </a>
-            </li>
-        {% else %}
-            <p>There are no company</p>
-        {% endfor %}
-    </ul>
+
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name organization</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for company in companies %}
+            <tr onclick="window.location.href='{{ path('intex_org_company_show', { 'company_id': company.id }) }}'; return false">
+                <th scope="row">{{ loop.index }}</th><td>{{ company.name }} </td>
+                {% else %}
+                    <p>There are no company</p>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
 
 {% endblock %}

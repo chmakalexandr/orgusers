@@ -10,11 +10,17 @@ namespace Intex\OrgBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use JMS\Serializer\Annotation as JMS;
 
 /**
+ *
  * @ORM\Entity(repositoryClass="Intex\OrgBundle\Entity\Repository\UserRepository")
+ * @UniqueEntity(
+ *     fields={"inn","snils"},
+ *     errorPath="snils",
+ *     message="This user is already exist."
+ * )
  * @ORM\Table(name="user")
  *
  * @JMS\ExclusionPolicy("all")
@@ -70,7 +76,7 @@ class User
     /**
      * @Assert\NotBlank()
      * @Assert\Regex("/^\d{12}$/")
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="bigint",unique=true)
      * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\XmlAttribute
@@ -80,7 +86,7 @@ class User
     /**
      * @Assert\NotBlank()
      * @Assert\Regex("/^\d{11}$/")
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="bigint",unique=true)
      * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\XmlAttribute

@@ -1,6 +1,7 @@
 <?php
 
 namespace Intex\OrgBundle\Entity\Repository;
+use Intex\OrgBundle\Entity\User as User;
 
 /**
  * UserRepository
@@ -15,9 +16,29 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('u')
             ->select('u')
             ->addOrderBy('u.lastname', 'ASC');
-
-
-        return $qb->getQuery()
+      return $qb->getQuery()
             ->getResult();
+    }
+
+    public function isUniqueUser(User $user)
+    {
+        $db = $this->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.inn = :inn')
+            ->setParameter('inn', $user->getInn());
+        $inn=$db->getQuery()
+            ->getResult();
+
+        $db = $this->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.snils = :snils')
+            ->setParameter('snils', $user->getSnils());
+        $snils=$db->getQuery()
+            ->getResult();
+
+        if ($inn||$snils) {
+            return false;
+        }
+        return true;
     }
 }

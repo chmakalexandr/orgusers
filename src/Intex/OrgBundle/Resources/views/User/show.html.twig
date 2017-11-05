@@ -1,28 +1,37 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
 
+{% block namepage %}
+    <h3>
+        Информация о пользователе
+    </h3>
+{% endblock %}
+
 {% block body %}
+    <ul class="list-group">
+
+    </ul>
     <div class="show_user">
-        <table>
+        <table class="table">
             <tr>
-                <td>Фамилия:</td><td>{{ user.lastname }}</td>
+                <td class="name-col">Фамилия:</td><td>{{ user.lastname }}</td>
             </tr>
             <tr>
-                <td>Имя:</td><td>{{ user.firstname }}</td>
+                <td class="name-col">Имя:</td><td>{{ user.firstname }}</td>
             </tr>
             <tr>
-                <td>Отчество:</td><td>{{ user.middlename }}</td>
+                <td class="name-col">Отчество:</td><td>{{ user.middlename }}</td>
             </tr>
             <tr>
-                <td>Дата рождения:</td><td>{{ user.bithday|date("m/d/Y")}}</td>
+                <td class="name-col">Дата рождения:</td><td>{{ user.bithday|date("m/d/Y")}}</td>
             </tr>
             <tr>
-                <td>ИНН:</td><td>{{ user.inn}}</td>
+                <td class="name-col">ИНН:</td><td>{{ user.inn}}</td>
             </tr>
             <tr>
-                <td>СНИЛС:</td><td>{{ user.snils}}</td>
+                <td class="name-col">СНИЛС:</td><td>{{ user.snils}}</td>
             </tr>
             <tr>
-                <td>Организация:</td><td><a href="{{ path('intex_org_company_show', { 'company_id': user.company.id }) }}">{{ user.company }} </a></td>
+                <td class="name-col">Организация:</td><td><a href="{{ path('intex_org_company_show', { 'company_id': user.company.id }) }}">{{ user.company }} </a></td>
             </tr>
         </table>
 

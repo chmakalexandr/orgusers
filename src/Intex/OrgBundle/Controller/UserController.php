@@ -76,7 +76,7 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
 
         return $this->render('IntexOrgBundle:User:form.html.twig', array(
-            'company_id' => $company_id,
+            'company' => $company,
             'form'   => $form->createView()
         ));
     }
@@ -90,16 +90,18 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
+
         if ($form->isValid()&&$form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            $this->addFlash('notice','User was be added!');
-            return $this->redirect($this->generateUrl('intex_org_company_users',array('company_id'=>$company_id)));
+            $this->addFlash('success','User was be added!');
+            $users=$company->getUsers();
+            return $this->redirect($this->generateUrl('intex_org_company_users',array('company_id'=>$company_id,'company'=>$company,'users'=>$users)));
         }
 
         return $this->render('IntexOrgBundle:User:form.html.twig', array(
-            'company_id' => $company_id,
+            'company' => $company,
             'form' => $form->createView()
         ));
     }

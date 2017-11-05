@@ -1,4 +1,9 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
+{% block namepage %}
+    <h3>
+        Главная
+    </h3>
+{% endblock %}
 
 {% block body %}
     <ul class="navigation">
@@ -7,11 +12,18 @@
         <li><a href="{{ path('intex_org_user_upload')}}">Upload users</a></li>
     </ul>
 
-    {% if users is defined %}
-        <pre>
-        {{ dump(users) }}
-        </pre>
-    {% endif %}
+    {% for error_message in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+    {% endfor %}
+
+    {% for success_message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success" role="alert">
+            {{ success_message }}
+        </div>
+    {% endfor %}
+
 {% endblock %}
 {% block sidebar %}
 

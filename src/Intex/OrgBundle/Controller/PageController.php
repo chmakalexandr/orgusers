@@ -8,6 +8,7 @@
 
 namespace Intex\OrgBundle\Controller;
 
+use Doctrine\DBAL\Types\DateType;
 use Intex\OrgBundle\Entity\Company;
 use Intex\OrgBundle\Entity\Organizations;
 use Intex\OrgBundle\Entity\User;
@@ -29,14 +30,13 @@ class PageController extends Controller
             ->add('file','file',array('label' => 'Load XML file',
                 "attr" => array(
                     "accept" => ".xml",
-                    "multiple" => "multiple",
                 )
             ))
             ->getForm();
 
-        return $this->render('IntexOrgBundle:Page:upload.html.twig', array(
+       return $this->render('IntexOrgBundle:Page:upload.html.twig', array(
             'form' => $form->createView()
-        ));
+       ));
     }
 
 
@@ -45,45 +45,43 @@ class PageController extends Controller
         $xmlFile=$request->files->get('form');
         $xmlData=file_get_contents($xmlFile['file']->getRealPath());
         $data=$this->get('jms_serializer')->deserialize($xmlData, 'Intex\OrgBundle\Entity\Organizations', 'xml');
-        $em = $this->getDoctrine()
-            ->getManager();
+        $em = $this->getDoctrine()->getManager();
         $companies=$data->getCompanies();
         foreach ($companies as $organization) {
             try {
-                $company = new Company();
-                $company->setName($organization->getName());
-                $company->setOgrn($organization->getOgrn());
-                $company->setOktmo($organization->getOktmo());
-                $em->persist($company);
-                $em->flush();
-                //$org=$em->getRepository('IntexOrgBundle:Company')->findOneBy(array('ogrn'=>$company->getOgrn()));
+                if ($em->getRepository('Intex\OrgBundle\Entity\Company')->isUniqueOrganization($organization)){
+                    $company = new Company();
+                    $company->setName($organization->getName());
+                    $company->setOgrn($organization->getOgrn());
+                    $company->setOktmo($organization->getOktmo());
+                    $em->persist($company);
+                } else{
+                    $company=$em->getRepository('Intex\OrgBundle\Entity\Company')->findOneBy(array("ogrn"=>$organization->getOgrn()));
+                }
                 $users=$organization->getUsers();
                 foreach ($users as $human){
-                    $user=New User();
-                    $user->setCompany($company);
-                    $user->setFirstname($human->getFirstName());
-                    $user->setMiddlename($human->getMiddlename());
-                    $user->setLastname($human->getLastName());
-                    $user->setSnils($human->getSnils());
-                    $user->setInn($human->getInn());
-                    $dateBith=$human->getBithday();
-
-                    $data= (array)$dateBith;
-                    $dt=date('Y-m-d',strtotime($data['date']));
-                    $user->setBithday($dt);
-                    $em->persist($user);
-                    $em->flush();
+                    if ($em->getRepository('Intex\OrgBundle\Entity\User')->isUniqueUser($human)){
+                        $user=New User();
+                        $user->setCompany($company);
+                        $user->setFirstname($human->getFirstName());
+                        $user->setMiddlename($human->getMiddlename());
+                        $user->setLastname($human->getLastName());
+                        $user->setSnils($human->getSnils());
+                        $user->setInn($human->getInn());
+                        $user->setBithday( $human->getBithday());
+                        $em->persist($user);
+                    } else{
+                        $this->addFlash('error','В файле есть данные о пользователях, которые уже присутствуют в базе. Загрузка прекращена.');
+                        return $this->render('IntexOrgBundle:Page:index.html.twig');
+                    }
                 }
-
             } catch (Exception $e) {
-                $this->addFlash('notice',$e->getMessage());
+                $this->addFlash('error',$e->getMessage());
+                return $this->render('IntexOrgBundle:Page:index.html.twig');
             }
         }
-
-        $this->addFlash('notice', 'Users successfully loaded');
-        return $this->render('IntexOrgBundle:Page:index.html.twig', array(
-            'users' => $data
-        ));
-
+        $em->flush();
+        $this->addFlash('success', 'Users successfully loaded');
+        return $this->render('IntexOrgBundle:Page:index.html.twig');
     }
 }

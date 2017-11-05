@@ -1,6 +1,7 @@
 <?php
 
 namespace Intex\OrgBundle\Entity\Repository;
+use Intex\OrgBundle\Entity\Company as Company;
 
 /**
  * CompanyRepository
@@ -18,5 +19,20 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb->getQuery()
             ->getResult();
+    }
+
+    public function isUniqueOrganization(Company $company)
+    {
+        $db = $this->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.ogrn = :ogrn')
+            ->setParameter('ogrn', $company->getOgrn());
+        $ogrn=$db->getQuery()
+            ->getResult();
+
+        if ($ogrn) {
+            return false;
+        }
+        return true;
     }
 }
