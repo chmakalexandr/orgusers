@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ form_start(form, { 'action': path('intex_org_user_create',{'company_id':company.id}), 'method': 'POST', 'attr': {'class': 'userform'} }) }}
+    {{ form_start(form, { 'action': path('intex_org_user_create',{'companyId':company.id}), 'method': 'POST', 'attr': {'class': 'userform'} }) }}
     {{ form_widget(form) }}
     <p>
         <input type="submit" value="Submit" class="btn btn-default">

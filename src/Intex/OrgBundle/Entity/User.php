@@ -39,7 +39,6 @@ class User
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
-     *
      * @JMS\Expose
      * @JMS\XmlAttribute
      */
@@ -48,7 +47,6 @@ class User
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
-     *
      * @JMS\Expose
      * @JMS\XmlAttribute
      */
@@ -66,7 +64,6 @@ class User
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="date")
-     *
      * @JMS\Type("DateTime<'Y-m-d','','|Y-m-d'>")
      * @JMS\Expose
      * @JMS\XmlAttribute
@@ -211,9 +208,6 @@ class User
     {
         $this->snils = $snils;
     }
-
-
-
 
     /**
      * Set company

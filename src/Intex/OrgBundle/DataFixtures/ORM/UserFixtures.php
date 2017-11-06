@@ -18,7 +18,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $user1=New User();
+        $user1 = New User();
         $user1->setFirstname('Иван');
         $user1->setLastname('Иванов');
         $user1->setMiddlename('Иванович');
@@ -28,7 +28,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface
         $user1->setCompany($manager->merge($this->getReference('org-1')));
         $manager->persist($user1);
 
-        $user2=New User();
+        $user2 = New User();
         $user2->setFirstname('Петр');
         $user2->setLastname('Петров');
         $user2->setMiddlename('Петрович');
@@ -38,7 +38,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface
         $user2->setCompany($manager->merge($this->getReference('org-1')));
         $manager->persist($user2);
 
-        $user3=New User();
+        $user3 = New User();
         $user3->setFirstname('Сергей');
         $user3->setLastname('Сидоров');
         $user3->setMiddlename('Иванович');
@@ -56,5 +56,4 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface
     {
         return 2;
     }
-
 }

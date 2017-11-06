@@ -26,15 +26,13 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->select('u')
             ->where('u.inn = :inn')
             ->setParameter('inn', $user->getInn());
-        $inn=$db->getQuery()
-            ->getResult();
+        $inn= $db->getQuery()->getResult();
 
         $db = $this->createQueryBuilder('u')
             ->select('u')
             ->where('u.snils = :snils')
             ->setParameter('snils', $user->getSnils());
-        $snils=$db->getQuery()
-            ->getResult();
+        $snils = $db->getQuery()->getResult();
 
         if ($inn||$snils) {
             return false;

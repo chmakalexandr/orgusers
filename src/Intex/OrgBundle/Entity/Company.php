@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as JMS;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-
 /**
  * @ORM\Entity(repositoryClass="Intex\OrgBundle\Entity\Repository\CompanyRepository")
  * @UniqueEntity(
@@ -30,7 +29,6 @@ class Company
 {
     /**
      * @Assert\NotBlank()
-     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")

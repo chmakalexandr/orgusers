@@ -10,7 +10,7 @@
     <div class="show_company">
         <table class="table">
         <tr>
-            <td class="name-col">Название организации:</td><td>{{ company.name }}</td>
+            <td class="name-col" width="50%">Название организации:</td><td>{{ company.name }}</td>
         </tr>
         <tr>
             <td class="name-col">ОГРН:</td><td>{{ company.ogrn }}</td>
@@ -23,8 +23,8 @@
 
         <div class="row">
             <div class="list-group list-group-horizontal">
-                <a class="list-group-item" href="{{  path('intex_org_company_users',{ 'company_id': company.id })}}">Show company users</a>
-                <a class="list-group-item" href="{{  path('intex_org_user_new',{ 'company_id': company.id })}}">Add user in company</a>
+                <a class="list-group-item" href="{{  path('intex_org_company_users',{ 'companyId': company.id })}}">Show company users</a>
+                <a class="list-group-item" href="{{  path('intex_org_user_new',{ 'companyId': company.id })}}">Add user in company</a>
             </div>
         </div>
     </div>

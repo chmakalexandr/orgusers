@@ -7,9 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    <ul class="list-group">
 
-    </ul>
     <div class="show_user">
         <table class="table">
             <tr>
@@ -31,7 +29,7 @@
                 <td class="name-col">СНИЛС:</td><td>{{ user.snils}}</td>
             </tr>
             <tr>
-                <td class="name-col">Организация:</td><td><a href="{{ path('intex_org_company_show', { 'company_id': user.company.id }) }}">{{ user.company }} </a></td>
+                <td class="name-col">Организация:</td><td><a href="{{ path('intex_org_company_show', { 'companyId': user.company.id }) }}">{{ user.company }} </a></td>
             </tr>
         </table>
 

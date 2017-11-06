@@ -12,13 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CompanyController extends Controller
 {
-    public function indexAction()
+    public function listCompaniesAction()
     {
-        $em = $this->getDoctrine()
-            ->getManager();
-
-        $companies=$em->getRepository('IntexOrgBundle:Company')->findAll();
-
+        $em = $this->getDoctrine()->getManager();
+        $companies = $em->getRepository('IntexOrgBundle:Company')->findAll();
         if (!$companies) {
             throw $this->createNotFoundException('Unable to find company.');
         }
@@ -27,18 +24,15 @@ class CompanyController extends Controller
         ));
     }
 
-    public function showCompanyAction($company_id)
+    public function showCompanyAction($companyId)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $company = $em->getRepository('IntexOrgBundle:Company')->find($company_id);
-
+        $company = $em->getRepository('IntexOrgBundle:Company')->find($companyId);
         if (!$company) {
             throw $this->createNotFoundException('Unable to find company.');
         }
-
         return $this->render('IntexOrgBundle:Company:show.html.twig', array(
-            'company'      => $company,
+            'company' => $company,
         ));
     }
 }

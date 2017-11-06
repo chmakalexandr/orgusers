@@ -19,13 +19,13 @@ class CompanyFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $org1=New Company();
+        $org1 = New Company();
         $org1->setName('Организация 1');
         $org1->setOgrn(1223231234);
         $org1->setOktmo(4564536746);
         $manager->persist($org1);
 
-        $org2=New Company();
+        $org2 = New Company();
         $org2->setName('Организация 2');
         $org2->setOgrn(474676756676);
         $org2->setOktmo(98067867867);
@@ -39,5 +39,4 @@ class CompanyFixtures extends AbstractFixture implements OrderedFixtureInterface
     {
         return 1;
     }
-
 }

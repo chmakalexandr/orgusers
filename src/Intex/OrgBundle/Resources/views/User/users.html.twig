@@ -1,11 +1,9 @@
 {% extends 'IntexOrgBundle:User:index.html.twig' %}
 {% block namepage %}
     <h3>
-        Пользователи организации: {{ company.name }}
+        Пользователи организации: <a href="{{ path('intex_org_company_show', { 'company_id': company.id }) }}">{{ company.name }} </a>
     </h3>
 {% endblock %}
-
-
 
 {% block body %}
     {{ parent() }}
@@ -15,5 +13,4 @@
             {{ success_message }}
         </div>
     {% endfor %}
-
 {% endblock %}

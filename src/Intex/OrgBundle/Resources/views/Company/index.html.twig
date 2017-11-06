@@ -17,8 +17,8 @@
         </thead>
         <tbody>
             {% for company in companies %}
-            <tr onclick="window.location.href='{{ path('intex_org_company_show', { 'company_id': company.id }) }}'; return false">
-                <th scope="row">{{ loop.index }}</th><td>{{ company.name }} </td>
+            <tr onclick="window.location.href='{{ path('intex_org_company_show', { 'companyId': company.id }) }}'; return false">
+                <td scope="row">{{ loop.index }}</td><td>{{ company.name }} </td>
                 {% else %}
                     <p>There are no company</p>
                 {% endfor %}

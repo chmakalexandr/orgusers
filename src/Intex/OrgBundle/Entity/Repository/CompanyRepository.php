@@ -18,17 +18,17 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
             ->addOrderBy('c.name', 'ASC');
 
         return $qb->getQuery()
-            ->getResult();
+               ->getResult();
     }
 
     public function isUniqueOrganization(Company $company)
     {
         $db = $this->createQueryBuilder('c')
-            ->select('c')
-            ->where('c.ogrn = :ogrn')
-            ->setParameter('ogrn', $company->getOgrn());
-        $ogrn=$db->getQuery()
-            ->getResult();
+              ->select('c')
+              ->where('c.ogrn = :ogrn')
+              ->setParameter('ogrn', $company->getOgrn());
+        $ogrn = $db->getQuery()
+                ->getResult();
 
         if ($ogrn) {
             return false;

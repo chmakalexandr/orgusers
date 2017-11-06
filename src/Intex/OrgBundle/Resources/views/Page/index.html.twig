@@ -1,4 +1,11 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css')}}" type="text/css"/>
+{% endblock %}
+
+
 {% block namepage %}
     <h3>
         Главная
@@ -6,11 +13,28 @@
 {% endblock %}
 
 {% block body %}
-    <ul class="navigation">
-        <li><a href="{{ path('intex_org_users') }}">Show Users</a></li>
-        <li><a href="{{ path('intex_org_companies') }}">Show Organizations</a></li>
-        <li><a href="{{ path('intex_org_user_upload')}}">Upload users</a></li>
-    </ul>
+
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <a href="{{ path('intex_org_users') }}" class="thumbnail">
+                <i class="fa fa-users fa-5x" aria-hidden="true"></i>
+                <p>Show Users</p>
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <a href="{{ path('intex_org_companies') }}" class="thumbnail">
+                <i class="fa fa-university fa-5x" aria-hidden="true"></i>
+                <p>Show Organizations</p>
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <a href="{{ path('intex_org_user_upload')}}" class="thumbnail">
+                <i class="fa fa-upload fa-5x" aria-hidden="true"></i>
+                <p>Upload users</p>
+
+            </a>
+        </div>
+    </div>
 
     {% for error_message in app.session.flashBag.get('error') %}
         <div class="alert alert-danger" role="alert">

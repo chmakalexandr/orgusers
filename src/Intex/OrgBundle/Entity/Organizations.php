@@ -7,7 +7,6 @@
  */
 namespace Intex\OrgBundle\Entity;
 
-
 use JMS\Serializer\Annotation as JMS;
 
 /**
