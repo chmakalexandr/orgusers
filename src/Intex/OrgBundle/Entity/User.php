@@ -29,7 +29,6 @@ use JMS\Serializer\Annotation as JMS;
 class User
 {
     /**
-     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -55,7 +54,6 @@ class User
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
-     *
      * @JMS\Expose
      * @JMS\XmlAttribute
      */

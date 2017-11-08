@@ -9,11 +9,10 @@
 
 namespace Intex\OrgBundle\Form;
 
-    use Symfony\Component\Form\AbstractType;
-    use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-    use Symfony\Component\Form\FormBuilderInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolver;
-    use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class UserType extends AbstractType
 {
@@ -45,6 +44,4 @@ class UserType extends AbstractType
     {
         return 'intex_orgbundle_usertype';
     }
-
-
 }

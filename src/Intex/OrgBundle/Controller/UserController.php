@@ -10,12 +10,22 @@ namespace Intex\OrgBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Intex\OrgBundle\Entity\User;
+use Intex\OrgBundle\Entity\Company;
 use Intex\OrgBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session;
 
+
+/**
+ * Class UserController
+ * @package Intex\OrgBundle\Controller
+ */
 class UserController extends Controller
 {
+
+    /**
+     * Render list all users
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listUsersAction()
     {
         $em = $this->getDoctrine()
@@ -31,6 +41,11 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Render information about user by id
+     * @param $userId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function showUserAction($userId)
     {
         $em = $this->getDoctrine()->getManager();
@@ -45,6 +60,11 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Renders list company users
+     * @param $companyId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listOrgUsersAction($companyId)
     {
         $company = $this->getCompany($companyId);
@@ -60,6 +80,11 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Renders form for add user to company
+     * @param $companyId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function newUserAction($companyId)
     {
         $company = $this->getCompany($companyId);
@@ -76,6 +101,12 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Add user in DB
+     * @param Request $request
+     * @param $companyId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function createUserAction(Request $request, $companyId)
     {
         $company = $this->getCompany($companyId);
@@ -100,6 +131,62 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Load users with companies from XML file
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function loadUsersAction(Request $request)
+    {
+        try {
+            $xmlFile = $request->files->get('form');
+            $xmlData = file_get_contents($xmlFile['file']->getRealPath());
+            $data = $this->get('jms_serializer')->deserialize($xmlData, 'Intex\OrgBundle\Entity\Organizations', 'xml');
+            $em = $this->getDoctrine()->getManager();
+            $companies = $data->getCompanies();
+            foreach ($companies as $organization) {
+                if ($em->getRepository('Intex\OrgBundle\Entity\Company')->isUniqueOrganization($organization)){
+                    $company = new Company();
+                    $company->setName($organization->getName());
+                    $company->setOgrn($organization->getOgrn());
+                    $company->setOktmo($organization->getOktmo());
+                    $em->persist($company);
+                } else {
+                    $company = $em->getRepository('Intex\OrgBundle\Entity\Company')->findOneBy(array("ogrn"=>$organization->getOgrn()));
+                }
+                $users = $organization->getUsers();
+                foreach ($users as $human) {
+                    if ($em->getRepository('Intex\OrgBundle\Entity\User')->isUniqueUser($human)){
+                        $user = New User();
+                        $user->setCompany($company);
+                        $user->setFirstname($human->getFirstName());
+                        $user->setMiddlename($human->getMiddlename());
+                        $user->setLastname($human->getLastName());
+                        $user->setSnils($human->getSnils());
+                        $user->setInn($human->getInn());
+                        $user->setBithday( $human->getBithday());
+                        $em->persist($user);
+                    } else {
+                        $this->addFlash('error','В файле есть данные о пользователях, которые уже присутствуют в базе. Загрузка прекращена.');
+                        return $this->render('IntexOrgBundle:Page:index.html.twig');
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            $this->addFlash('error',$e->getMessage());
+            return $this->render('IntexOrgBundle:Page:index.html.twig');
+        }
+
+        $em->flush();
+        $this->addFlash('success', 'Users successfully loaded');
+        return $this->render('IntexOrgBundle:Page:index.html.twig');
+    }
+
+    /**
+     * Shows the company in which the user belongs
+     * @param $companyId
+     * @return \Intex\OrgBundle\Entity\Company|null|object
+     */
     protected function getCompany($companyId)
     {
         $em = $this->getDoctrine()->getManager();

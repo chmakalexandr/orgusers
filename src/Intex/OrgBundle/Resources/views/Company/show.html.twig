@@ -1,26 +1,24 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
 
 {% block namepage %}
-<h3>
-    Информация об организации: {{ company.name }}
-</h3>
+    <h3>
+        Информация об организации: {{ company.name }}
+    </h3>
 {% endblock %}
 
 {% block body %}
     <div class="show_company">
         <table class="table">
-        <tr>
-            <td class="name-col" width="50%">Название организации:</td><td>{{ company.name }}</td>
-        </tr>
-        <tr>
-            <td class="name-col">ОГРН:</td><td>{{ company.ogrn }}</td>
-        </tr>
-        <tr>
-            <td class="name-col">ОКТМО:</td><td>{{ company.oktmo }} </td>
-        </tr>
-
+            <tr>
+                <td class="name-col" width="50%">Название организации:</td><td>{{ company.name }}</td>
+            </tr>
+            <tr>
+                <td class="name-col">ОГРН:</td><td>{{ company.ogrn }}</td>
+            </tr>
+            <tr>
+                <td class="name-col">ОКТМО:</td><td>{{ company.oktmo }} </td>
+            </tr>
         </table>
-
         <div class="row">
             <div class="list-group list-group-horizontal">
                 <a class="list-group-item" href="{{  path('intex_org_company_users',{ 'companyId': company.id })}}">Show company users</a>
@@ -28,5 +26,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}

@@ -11,6 +11,9 @@ use Intex\OrgBundle\Entity\User as User;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return array
+     */
     public function getAllUsers()
     {
         $qb = $this->createQueryBuilder('u')
@@ -20,6 +23,10 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
+    /**
+     * @param User $user
+     * @return bool
+     */
     public function isUniqueUser(User $user)
     {
         $db = $this->createQueryBuilder('u')

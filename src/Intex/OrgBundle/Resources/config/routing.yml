@@ -58,6 +58,6 @@ intex_org_user_upload:
 
 intex_org_user_load:
       path: /load/
-      defaults: { _controller: IntexOrgBundle:Page:loadUsers }
+      defaults: { _controller: IntexOrgBundle:User:loadUsers }
       requirements:
             methods:  POST

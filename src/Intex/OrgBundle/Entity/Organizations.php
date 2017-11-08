@@ -17,7 +17,6 @@ use JMS\Serializer\Annotation as JMS;
 class Organizations
 {
     /**
-     *
      * @JMS\Type("ArrayCollection<Intex\OrgBundle\Entity\Company>")
      * @JMS\XmlList(inline=true, entry="org")
      */

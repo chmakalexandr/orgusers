@@ -11,6 +11,9 @@ use Intex\OrgBundle\Entity\Company as Company;
  */
 class CompanyRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return array
+     */
     public function getAllCompanies()
     {
         $qb = $this->createQueryBuilder('c')
@@ -21,6 +24,10 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
                ->getResult();
     }
 
+    /**
+     * @param Company $company
+     * @return bool
+     */
     public function isUniqueOrganization(Company $company)
     {
         $db = $this->createQueryBuilder('c')

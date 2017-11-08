@@ -3,8 +3,12 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css')}}" type="text/css"/>
+    <style type="text/css">
+        .main-col {
+            border-right: 0px;
+        }
+    </style>
 {% endblock %}
-
 
 {% block namepage %}
     <h3>
@@ -13,7 +17,6 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="row">
         <div class="col-xs-6 col-md-3">
             <a href="{{ path('intex_org_users') }}" class="thumbnail">
@@ -47,8 +50,7 @@
             {{ success_message }}
         </div>
     {% endfor %}
-
 {% endblock %}
-{% block sidebar %}
 
+{% block sidebar %}
 {% endblock %}

@@ -22,14 +22,10 @@
                     <td scope="row">{{ loop.index }}</td><td>{{ user.lastname }}</td><td>{{ user.firstname }}</td><td>{{ user.middlename }}</td>
                 </a>
             </tr>
-
         {% else %}
             <p>There are no users in this company</p>
         {% endfor %}
         </tbody>
     </table>
-
-
-
 {% endblock %}
 
