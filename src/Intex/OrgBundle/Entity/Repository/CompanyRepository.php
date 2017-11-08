@@ -1,7 +1,7 @@
 <?php
 
 namespace Intex\OrgBundle\Entity\Repository;
-use Intex\OrgBundle\Entity\Company as Company;
+
 
 /**
  * CompanyRepository
@@ -25,10 +25,11 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * Checks if there is organization in the database
      * @param Company $company
      * @return bool
      */
-    public function isUniqueOrganization(Company $company)
+    public function isUniqueOrganization(\Intex\OrgBundle\Entity\Company $company)
     {
         $db = $this->createQueryBuilder('c')
               ->select('c')

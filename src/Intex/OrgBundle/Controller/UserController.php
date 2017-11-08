@@ -167,7 +167,7 @@ class UserController extends Controller
                         $user->setBithday( $human->getBithday());
                         $em->persist($user);
                     } else {
-                        $this->addFlash('error','В файле есть данные о пользователях, которые уже присутствуют в базе. Загрузка прекращена.');
+                        $this->addFlash('error','The file contains data about users who are already present in the database. Upload canceled.');
                         return $this->render('IntexOrgBundle:Page:index.html.twig');
                     }
                 }

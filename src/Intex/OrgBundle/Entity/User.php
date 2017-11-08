@@ -37,7 +37,7 @@ class User
 
     /**
      * @Assert\NotBlank()
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",length=100)
      * @JMS\Expose
      * @JMS\XmlAttribute
      */
@@ -45,7 +45,7 @@ class User
 
     /**
      * @Assert\NotBlank()
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",length=100)
      * @JMS\Expose
      * @JMS\XmlAttribute
      */
@@ -53,7 +53,7 @@ class User
 
     /**
      * @Assert\NotBlank()
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",length=100)
      * @JMS\Expose
      * @JMS\XmlAttribute
      */

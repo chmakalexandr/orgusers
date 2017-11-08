@@ -1,7 +1,7 @@
 <?php
 
 namespace Intex\OrgBundle\Entity\Repository;
-use Intex\OrgBundle\Entity\User as User;
+
 
 /**
  * UserRepository
@@ -24,10 +24,11 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * Checks if there is user in the database
      * @param User $user
      * @return bool
      */
-    public function isUniqueUser(User $user)
+    public function isUniqueUser(\Intex\OrgBundle\Entity\User $user)
     {
         $db = $this->createQueryBuilder('u')
             ->select('u')
@@ -41,9 +42,9 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('snils', $user->getSnils());
         $snils = $db->getQuery()->getResult();
 
-        if ($inn||$snils) {
-            return false;
+        if ($inn==null&&$snils==null) {
+            return true;
         }
-        return true;
+        return false;
     }
 }
