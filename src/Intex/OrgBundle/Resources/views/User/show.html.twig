@@ -2,7 +2,7 @@
 
 {% block namepage %}
     <h3>
-        User information
+        {% trans %} User information {% endtrans %}
     </h3>
 {% endblock %}
 
@@ -10,25 +10,32 @@
     <div class="show_user">
         <table class="table">
             <tr>
-                <td class="name-col">Фамилия:</td><td>{{ user.lastname }}</td>
+                <td class="name-col">Фамилия:</td>
+                <td>{{ user.lastname }}</td>
             </tr>
             <tr>
-                <td class="name-col">Имя:</td><td>{{ user.firstname }}</td>
+                <td class="name-col">Имя:</td>
+                <td>{{ user.firstname }}</td>
             </tr>
             <tr>
-                <td class="name-col">Отчество:</td><td>{{ user.middlename }}</td>
+                <td class="name-col">Отчество:</td>
+                <td>{{ user.middlename }}</td>
             </tr>
             <tr>
-                <td class="name-col">Дата рождения:</td><td>{{ user.bithday|date("m/d/Y")}}</td>
+                <td class="name-col">Дата рождения:</td>
+                <td>{{ user.bithday|date("m/d/Y")}}</td>
             </tr>
             <tr>
-                <td class="name-col">ИНН:</td><td>{{ user.inn}}</td>
+                <td class="name-col">ИНН:</td>
+                <td>{{ user.inn}}</td>
             </tr>
             <tr>
-                <td class="name-col">СНИЛС:</td><td>{{ user.snils}}</td>
+                <td class="name-col">СНИЛС:</td>
+                <td>{{ user.snils}}</td>
             </tr>
             <tr>
-                <td class="name-col">Организация:</td><td><a href="{{ path('intex_org_company_show', { 'companyId': user.company.id }) }}">{{ user.company }} </a></td>
+                <td class="name-col">Организация:</td>
+                <td><a href="{{ path('intex_org_company_show', { 'companyId': user.company.id }) }}">{{ user.company }} </a></td>
             </tr>
         </table>
     </div>

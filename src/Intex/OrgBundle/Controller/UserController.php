@@ -144,6 +144,7 @@ class UserController extends Controller
             $data = $this->get('jms_serializer')->deserialize($xmlData, 'Intex\OrgBundle\Entity\Organizations', 'xml');
             $em = $this->getDoctrine()->getManager();
             $companies = $data->getCompanies();
+
             foreach ($companies as $organization) {
                 if ($em->getRepository('Intex\OrgBundle\Entity\Company')->isUniqueOrganization($organization)){
                     $company = new Company();
@@ -167,7 +168,7 @@ class UserController extends Controller
                         $user->setBithday( $human->getBithday());
                         $em->persist($user);
                     } else {
-                        $this->addFlash('error','The file contains data about users who are already present in the database. Upload canceled.');
+                        $this->addFlash('error',$this->get('translator')->trans('The file contains data about users who are already present in the database. Upload canceled.'));
                         return $this->render('IntexOrgBundle:Page:index.html.twig');
                     }
                 }

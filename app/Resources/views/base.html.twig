@@ -2,27 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Users & organizations{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
-            <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet" />
+            {% stylesheets
+                '@IntexOrgBundle/Resources/public/css/*'
+                output='css/orgusers.css'
+                filter='yui_css'
+            %}
+            <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+            {% endstylesheets %}
+            <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
         {% endblock %}
     </head>
     <body>
-
         <section id="wrapper">
 
             <header id="header">
-                <div class="top">
-                    {#{% block navigation %}
-                        <nav>
-                            <ul class="navigation">
-                                <li><a href="{{ path('intex_org_homepage') }}">Home</a></li>
-
-                            </ul>
-                        </nav>
-                    {% endblock %}#}
-                </div>
                 <hgroup>
                     <h2>{% block site_title %}<a href="{{ path('intex_org_homepage') }}">Users & Organizations</a>{% endblock %}</h2>
                 </hgroup>
@@ -46,8 +41,11 @@
         </section>
 
         {% block javascripts %}
-            <script src="{{ asset('js/jquery.min.js') }}"></script>
-            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            {% javascripts
+                '@IntexOrgBundle/Resources/public/js/*'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
         {% endblock %}
     </body>
 </html>

@@ -29,6 +29,7 @@ framework:
         handler_id: ~
     fragments: ~
     http_method_override: true
+    translator: { fallback: en }
 
 # Twig Configuration
 twig:
@@ -59,10 +60,11 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
-# Swiftmailer Configuration
-swiftmailer:
-    transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
-    spool: { type: memory }
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    bundles:    [IntexOrgBundle]
+    filters:
+        cssrewrite: ~
+        yui_css:
+                    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"

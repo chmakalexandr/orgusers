@@ -1,7 +1,8 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
+
 {% block namepage %}
     <h3>
-        Add user to organization {{ company.name}}
+        {% trans %} Add user to organization {{ company.name}} {% endtrans %}
     </h3>
 {% endblock %}
 

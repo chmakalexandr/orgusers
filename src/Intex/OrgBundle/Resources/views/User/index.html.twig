@@ -2,7 +2,7 @@
 
 {% block namepage %}
     <h3>
-        List of all users
+        {% trans %} List of all users {% endtrans %}
     </h3>
 {% endblock %}
 {% block body %}
@@ -19,7 +19,8 @@
         {% for user in users %}
             <tr onclick="window.location.href='{{ path('intex_org_user_show', { 'userId': user.id }) }}'; return false">
                 <a href="{{ path('intex_org_user_show', { 'userId': user.id }) }}">
-                    <td scope="row">{{ loop.index }}</td><td>{{ user.lastname }}</td><td>{{ user.firstname }}</td><td>{{ user.middlename }}</td>
+                    <td scope="row">{{ loop.index }}</td><td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td><td>{{ user.middlename }}</td>
                 </a>
             </tr>
         {% else %}
