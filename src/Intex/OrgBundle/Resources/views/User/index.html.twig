@@ -1,4 +1,9 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css')}}" type="text/css"/>
+
+{% endblock %}
 
 {% block namepage %}
     <h3>
@@ -10,21 +15,25 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Middle Name</th>
+            <th>{% trans %}Last Name{% endtrans %}</th>
+            <th>{% trans %}First Name{% endtrans %}</th>
+            <th>{% trans %}Middle Name{% endtrans %}</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for user in users %}
-            <tr onclick="window.location.href='{{ path('intex_org_user_show', { 'userId': user.id }) }}'; return false">
-                <a href="{{ path('intex_org_user_show', { 'userId': user.id }) }}">
-                    <td scope="row">{{ loop.index }}</td><td>{{ user.lastname }}</td>
-                    <td>{{ user.firstname }}</td><td>{{ user.middlename }}</td>
-                </a>
+            <tr>
+                <td scope="row">{{ loop.index }}</td><td>{{ user.lastname }}</td>
+                <td>{{ user.firstname }}</td><td>{{ user.middlename }}</td>
+                <td>
+                    <a href="{{ path('intex_org_user_show', { 'userId': user.id }) }}" title="{% trans %}User info{% endtrans %}">
+                       <i class="fa fa-list" aria-hidden="true"></i>
+                    </a>
+                </td>
             </tr>
         {% else %}
-            <p>There are no users in this company</p>
+            <p>There are no users</p>
         {% endfor %}
         </tbody>
     </table>

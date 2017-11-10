@@ -24,9 +24,7 @@ class CompanyController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $companies = $em->getRepository('IntexOrgBundle:Company')->findAll();
-        if (!$companies) {
-            throw $this->createNotFoundException('Unable to find company.');
-        }
+
         return $this->render('IntexOrgBundle:Company:index.html.twig', array(
             'companies' => $companies
         ));

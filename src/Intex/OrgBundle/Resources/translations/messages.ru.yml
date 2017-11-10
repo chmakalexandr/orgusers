@@ -7,3 +7,27 @@ Organization Users: Пользователи организации
 Organizations: Организации
 Organization's Information: Информация об организации
 The file contains data about users who are already present in the database. Upload canceled.: В файле есть совпадения.
+Users successfully loaded: Пользователи успешно загружены
+User was be added!: Пользователь был успешно добавлен
+Name organization: Название организации
+There are no company: Нет такой компании
+Show company users: Показать пользователей организации
+Add user in company: Добавить пользователя в организацию
+Last Name: Фамилия
+First Name: Имя
+Middle Name: Отчество
+Show Organizations: Показать организации
+Users & Organizations: Пользователи и организации
+Show Users: Показать пользователей
+Upload users: Загрузить пользователей
+Upload Document: Загрузить документ
+Add user: Добавить пользователя
+Submit: Отправить
+INN (12 digits): ИНН 12 цифр
+Bithday(YYYY-MM-DD): День рождения (ГГГГ-ММ-ДД)
+INN (12 digits): ИНН (12 цифр)
+SNILS (11 digits): СНИЛС (11 цифр)
+Load XML file: Загрузить XML-файл
+Company info: Информация об организации
+User info: Информация о пользователе
+

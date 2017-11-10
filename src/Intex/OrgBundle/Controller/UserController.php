@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alex
- * Date: 30.10.2017
- * Time: 12:45
- */
 
 namespace Intex\OrgBundle\Controller;
 
@@ -33,9 +27,6 @@ class UserController extends Controller
         $users = $em->getRepository('IntexOrgBundle:User')
             ->findAll();
 
-        if (!$users) {
-            throw $this->createNotFoundException('Unable to find users.');
-        }
         return $this->render('IntexOrgBundle:User:index.html.twig', array(
             'users' => $users
         ));
@@ -120,7 +111,7 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            $this->addFlash('success','User was be added!');
+            $this->addFlash('success',$this->get('translator')->trans('User was be added!'));
             $users = $company->getUsers();
             return $this->redirect($this->generateUrl('intex_org_company_users',array('companyId'=>$companyId,'company'=>$company,'users'=>$users)));
         }
@@ -144,20 +135,23 @@ class UserController extends Controller
             $data = $this->get('jms_serializer')->deserialize($xmlData, 'Intex\OrgBundle\Entity\Organizations', 'xml');
             $em = $this->getDoctrine()->getManager();
             $companies = $data->getCompanies();
-
-            foreach ($companies as $organization) {
-                if ($em->getRepository('Intex\OrgBundle\Entity\Company')->isUniqueOrganization($organization)){
+            $orgsOgrns = $em->getRepository('Intex\OrgBundle\Entity\Company')->getAllOgrn();
+            //$presentOrg = array_intersect($companies,$organization);
+            //$notPresentOrg = array_diff($companies,$organization);
+            foreach ($companies as $organization){
+                if (!array_intersect($organization->getOgrn(), $orgsOgrns)) {
                     $company = new Company();
                     $company->setName($organization->getName());
                     $company->setOgrn($organization->getOgrn());
                     $company->setOktmo($organization->getOktmo());
                     $em->persist($company);
                 } else {
-                    $company = $em->getRepository('Intex\OrgBundle\Entity\Company')->findOneBy(array("ogrn"=>$organization->getOgrn()));
+                    $company = $em->getRepository('Intex\OrgBundle\Entity\Company')->findOneBy(array("ogrn" => $organization->getOgrn()));
                 }
                 $users = $organization->getUsers();
+                $usersInns = $em->getRepository('Intex\OrgBundle\Entity\User')->getAllInn();
                 foreach ($users as $human) {
-                    if ($em->getRepository('Intex\OrgBundle\Entity\User')->isUniqueUser($human)){
+                    if (!array_intersect($human->getInn(), $usersInns)) {
                         $user = New User();
                         $user->setCompany($company);
                         $user->setFirstname($human->getFirstName());
@@ -165,10 +159,10 @@ class UserController extends Controller
                         $user->setLastname($human->getLastName());
                         $user->setSnils($human->getSnils());
                         $user->setInn($human->getInn());
-                        $user->setBithday( $human->getBithday());
+                        $user->setBithday($human->getBithday());
                         $em->persist($user);
                     } else {
-                        $this->addFlash('error',$this->get('translator')->trans('The file contains data about users who are already present in the database. Upload canceled.'));
+                        $this->addFlash('error', $this->get('translator')->trans('The file contains data about users who are already present in the database. Upload canceled.'));
                         return $this->render('IntexOrgBundle:Page:index.html.twig');
                     }
                 }
@@ -179,7 +173,7 @@ class UserController extends Controller
         }
 
         $em->flush();
-        $this->addFlash('success', 'Users successfully loaded');
+        $this->addFlash('success', $this->get('translator')->trans('Users successfully loaded'));
         return $this->render('IntexOrgBundle:Page:index.html.twig');
     }
 

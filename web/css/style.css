@@ -57,9 +57,7 @@ h3{font-size: 24px;}
 }
 
 .table.table-striped.table-hover tr{
-    cursor: pointer;
-
-}
+    }
 
 .table{
     border: 1px solid #ccc;

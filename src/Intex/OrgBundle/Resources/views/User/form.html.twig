@@ -2,7 +2,7 @@
 
 {% block namepage %}
     <h3>
-        {% trans %} Add user to organization {{ company.name}} {% endtrans %}
+        {% trans %} Add user to organization {% endtrans %} {{ company.name}}
     </h3>
 {% endblock %}
 
@@ -10,6 +10,6 @@
     {{ form_start(form, { 'action': path('intex_org_user_create',{'companyId':company.id}), 'method': 'POST', 'attr': {'class': 'userform'} }) }}
     {{ form_widget(form) }}
     <p>
-        <input type="submit" value="Submit" class="btn btn-default">
+        <input type="submit" value="{% trans %}Submit{% endtrans %}" class="btn btn-default">
     </p>
 {% endblock %}

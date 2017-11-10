@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
+
 class UserType extends AbstractType
 {
     /**
@@ -21,13 +22,14 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstname','text', array('label' => 'Фамилия',));
-        $builder->add('lastname','text', array('label' => 'Имя',));
-        $builder->add('middlename','text', array('label' => 'Отчество',));
-        $builder->add('bithday', DateType::class, array('label' => 'День рождения(формат:ГГГГ-ММ-ДД)',
+
+        $builder->add('firstname','text', array('label' => 'Last Name',));
+        $builder->add('lastname','text', array('label' => 'First Name',));
+        $builder->add('middlename','text', array('label' => 'Middle Name',));
+        $builder->add('bithday', DateType::class, array('label' => 'Bithday(YYYY-MM-DD)',
             'widget' => 'single_text','format' => 'yyyy-MM-dd',));
-        $builder->add('inn','text',array('label' => 'ИНН(12 цифр)',));
-        $builder->add('snils', 'text',array('label' => 'ИНН(11 цифр)',));
+        $builder->add('inn','text',array('label' => 'INN (12 digits)',));
+        $builder->add('snils', 'text',array('label' => 'SNILS (11 digits)',));
     }
 
     /**

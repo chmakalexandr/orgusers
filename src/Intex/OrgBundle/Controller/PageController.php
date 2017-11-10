@@ -28,6 +28,7 @@ class PageController extends Controller
      */
     public function indexAction()
     {
+
         return $this->render('IntexOrgBundle:Page:index.html.twig');
     }
 
@@ -38,7 +39,7 @@ class PageController extends Controller
     public function uploadXmlAction()
     {
        $form = $this->createFormBuilder()
-           ->add('file','file',array('label' => 'Load XML file',
+           ->add('file','file',array('label' => $this->get('translator')->trans('Load XML file'),
                 "attr" => array("accept" => ".xml",)))
            ->getForm();
        return $this->render('IntexOrgBundle:Page:upload.html.twig', array(

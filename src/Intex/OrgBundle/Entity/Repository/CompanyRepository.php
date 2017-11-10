@@ -14,33 +14,22 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
     /**
      * @return array
      */
-    public function getAllCompanies()
+   public function getAllCompanies()
     {
         $qb = $this->createQueryBuilder('c')
             ->select('c')
             ->addOrderBy('c.name', 'ASC');
 
         return $qb->getQuery()
-               ->getResult();
+            ->getResult();
     }
 
-    /**
-     * Checks if there is organization in the database
-     * @param Company $company
-     * @return bool
-     */
-    public function isUniqueOrganization(\Intex\OrgBundle\Entity\Company $company)
+    public function getAllOgrn()
     {
-        $db = $this->createQueryBuilder('c')
-              ->select('c')
-              ->where('c.ogrn = :ogrn')
-              ->setParameter('ogrn', $company->getOgrn());
-        $ogrn = $db->getQuery()
-                ->getResult();
-
-        if ($ogrn) {
-            return false;
-        }
-        return true;
+        $qb = $this->createQueryBuilder('c')
+            ->select('c.ogrn');
+        return $qb->getQuery()
+            ->getResult();
     }
+
 }
