@@ -26,10 +26,12 @@ class CompanyRepository extends \Doctrine\ORM\EntityRepository
 
     public function getAllOgrn()
     {
-        $qb = $this->createQueryBuilder('c')
-            ->select('c.ogrn');
-        return $qb->getQuery()
-            ->getResult();
+        $qb = $this->createQueryBuilder('c')->select('c.ogrn');
+        $result = array();
+        $ogrns = $qb->getQuery()->getResult();
+        foreach ($ogrns as $ogrn){
+            array_push($result,$ogrn['ogrn']) ;
+        }
+        return $result;
     }
-
 }

@@ -41,7 +41,7 @@ intex_org_company_show:
 
 
 intex_org_company_users:
-    path: /userscompany/{companyId}
+    path: /users-company/{companyId}
     defaults: { _controller: IntexOrgBundle:User:listOrgUsers, _locale: %locale% }
     requirements:
             methods:  GET
@@ -50,7 +50,7 @@ intex_org_company_users:
 
 
 intex_org_user_new:
-     path: /newuserincomp/{companyId}
+     path: /new-user-in-comp/{companyId}
      defaults: { _controller: IntexOrgBundle:User:newUser, _locale: %locale% }
      requirements:
             methods:  GET
@@ -59,7 +59,7 @@ intex_org_user_new:
 
 
 intex_org_user_create:
-      path: /createuser/{companyId}
+      path: /create-user/{companyId}
       defaults: { _controller: IntexOrgBundle:User:createUser, _locale: %locale% }
       requirements:
             methods:  POST
@@ -69,7 +69,7 @@ intex_org_user_create:
 
 intex_org_user_upload:
       path: /upload/
-      defaults: { _controller: IntexOrgBundle:Page:uploadXml, _locale: %locale% }
+      defaults: { _controller: IntexOrgBundle:User:uploadXml, _locale: %locale% }
       requirements:
             _locale:  %available_langs%
 

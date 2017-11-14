@@ -21,7 +21,7 @@ body { line-height: 1;font-family: Arial, sans-serif;font-size: 12px; width: 100
 #header h2 a { color: #000; }
 #header h3 { text-align: center; font-family: 'La Belle Aurore', cursive; font-size: 32px; margin-bottom: 20px; font-weight: normal; color: #000000; }
 h3{font-size: 24px;}
-.main-col { width: 75%; display: inline-block; float: left; border-right: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
+.main-col { width: 75%; display: inline-block; float: left; padding: 20px; margin-bottom: 20px; }
 .sidebar { width: 25%; ; display: inline-block; }
 
 .main-col a { color: #F48A00; }
@@ -88,6 +88,9 @@ h3{font-size: 24px;}
 .sidebar li:last-child{
     border-bottom: 0;
 }
+.sidebar {
+    border-left: 1px solid #ccc;
+}
 .nav{
     font-weight: bolder;
 }
@@ -140,3 +143,12 @@ a.thumbnail{
     padding-top: 15%;
 }
 
+.language{
+    position: relative;
+    top: 5px;
+    left: 94%;
+}
+.language a{
+    color: #ffffff !important;
+    font-weight: bold;
+}

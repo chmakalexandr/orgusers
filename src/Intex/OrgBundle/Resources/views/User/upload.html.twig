@@ -6,8 +6,10 @@
 {% endblock %}
 {% block body %}
     {{ form_start(form, { 'action': path('intex_org_user_load'), 'method': 'POST', 'attr': {'class': 'loadform'} }) }}
+
     {{ form_widget(form) }}
-    <input type="submit" value="{% trans %}Upload Document{% endtrans %}"  class="btn btn-default" />
+
+    <input type="submit" value="{% trans %}Upload Document{% endtrans %}"  class="btn btn-default" id="up_submit" />
 
     {% for error_message in app.session.flashBag.get('error') %}
         <div class="alert alert-danger" role="alert">
@@ -20,4 +22,10 @@
             {{ success_message }}
         </div>
     {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/check_size.js')}}" />
+
 {% endblock %}

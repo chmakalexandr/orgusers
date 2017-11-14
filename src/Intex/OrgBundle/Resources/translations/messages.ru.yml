@@ -4,9 +4,10 @@ List of all users: Список всех пользователей
 User information: Информация о пользователе
 Add user to organization: Добавить пользователя в организацию
 Organization Users: Пользователи организации
+Organization: Организация
 Organizations: Организации
 Organization's Information: Информация об организации
-The file contains data about users who are already present in the database. Upload canceled.: В файле есть совпадения.
+The file contains data about users who are already present in the database. Upload canceled.: В файле есть данные о пользователях, которые уже присутствуют в БД.
 Users successfully loaded: Пользователи успешно загружены
 User was be added!: Пользователь был успешно добавлен
 Name organization: Название организации
@@ -25,9 +26,12 @@ Add user: Добавить пользователя
 Submit: Отправить
 INN (12 digits): ИНН 12 цифр
 Bithday(YYYY-MM-DD): День рождения (ГГГГ-ММ-ДД)
-INN (12 digits): ИНН (12 цифр)
-SNILS (11 digits): СНИЛС (11 цифр)
+Bithday: День рождения
+ITN: ИНН
+INILA: СНИЛС
+ITN (12 digits): ИНН (12 цифр)
+INILA (11 digits): СНИЛС (11 цифр)
 Load XML file: Загрузить XML-файл
 Company info: Информация об организации
 User info: Информация о пользователе
-
+Wrong file: Не правильный файл

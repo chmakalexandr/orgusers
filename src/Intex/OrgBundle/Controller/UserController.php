@@ -131,50 +131,73 @@ class UserController extends Controller
     {
         try {
             $xmlFile = $request->files->get('form');
-            $xmlData = file_get_contents($xmlFile['file']->getRealPath());
-            $data = $this->get('jms_serializer')->deserialize($xmlData, 'Intex\OrgBundle\Entity\Organizations', 'xml');
-            $em = $this->getDoctrine()->getManager();
-            $companies = $data->getCompanies();
-            $orgsOgrns = $em->getRepository('Intex\OrgBundle\Entity\Company')->getAllOgrn();
-            //$presentOrg = array_intersect($companies,$organization);
-            //$notPresentOrg = array_diff($companies,$organization);
-            foreach ($companies as $organization){
-                if (!array_intersect($organization->getOgrn(), $orgsOgrns)) {
-                    $company = new Company();
-                    $company->setName($organization->getName());
-                    $company->setOgrn($organization->getOgrn());
-                    $company->setOktmo($organization->getOktmo());
-                    $em->persist($company);
-                } else {
-                    $company = $em->getRepository('Intex\OrgBundle\Entity\Company')->findOneBy(array("ogrn" => $organization->getOgrn()));
-                }
-                $users = $organization->getUsers();
-                $usersInns = $em->getRepository('Intex\OrgBundle\Entity\User')->getAllInn();
-                foreach ($users as $human) {
-                    if (!array_intersect($human->getInn(), $usersInns)) {
-                        $user = New User();
-                        $user->setCompany($company);
-                        $user->setFirstname($human->getFirstName());
-                        $user->setMiddlename($human->getMiddlename());
-                        $user->setLastname($human->getLastName());
-                        $user->setSnils($human->getSnils());
-                        $user->setInn($human->getInn());
-                        $user->setBithday($human->getBithday());
-                        $em->persist($user);
+
+            if ((!$xmlFile['file']->getError())&&(substr($xmlFile['file']->getClientOriginalName(),-4) == ".xml")){
+                $xmlData = file_get_contents($xmlFile['file']->getRealPath());
+                $data = $this->get('jms_serializer')->deserialize($xmlData, 'Intex\OrgBundle\Entity\Organizations', 'xml');
+                $em = $this->getDoctrine()->getManager();
+                $companies = $data->getCompanies();
+                $orgsOgrns = $em->getRepository('Intex\OrgBundle\Entity\Company')->getAllOgrn();
+                //$presentOrg = array_intersect($companies,$organization);
+                //$notPresentOrg = array_diff($companies,$organization);
+                foreach ($companies as $organization){
+                    $ogrn = $organization->getOgrn();
+                    if (!in_array($ogrn, $orgsOgrns)) {
+                        $company = new Company();
+                        $company->setName($organization->getName());
+                        $company->setOgrn($organization->getOgrn());
+                        $company->setOktmo($organization->getOktmo());
+                        $em->persist($company);
                     } else {
-                        $this->addFlash('error', $this->get('translator')->trans('The file contains data about users who are already present in the database. Upload canceled.'));
-                        return $this->render('IntexOrgBundle:Page:index.html.twig');
+                        $company = $em->getRepository('Intex\OrgBundle\Entity\Company')->findOneBy(array("ogrn" => $organization->getOgrn()));
+                    }
+                    $users = $organization->getUsers();
+                    //$usersInns = $em->getRepository('Intex\OrgBundle\Entity\User')->getAllInn();
+                    //!in_array($human->getInn(), $usersInns)
+                    foreach ($users as $human) {
+                        if (!$em->getRepository('Intex\OrgBundle\Entity\User')->isNotUniqueUser($human)) {
+                            $user = New User();
+                            $user->setCompany($company);
+                            $user->setFirstname($human->getFirstName());
+                            $user->setMiddlename($human->getMiddlename());
+                            $user->setLastname($human->getLastName());
+                            $user->setSnils($human->getSnils());
+                            $user->setInn($human->getInn());
+                            $user->setBithday($human->getBithday());
+                            $em->persist($user);
+                        } else {
+                            $this->addFlash('error', $this->get('translator')->trans('The file contains data about users who are already present in the database. Upload canceled.'));
+                            return $this->render('IntexOrgBundle:Page:index.html.twig');
+                            //return $this->redirect($this->generateUrl('intex_org_user_upload'));
+                        }
                     }
                 }
+            } else {
+                $this->addFlash('error', $this->get('translator')->trans('Wrong file'));
+                //return $this->redirect($this->generateUrl('intex_org_user_upload'));
+                return $this->render('IntexOrgBundle:Page:index.html.twig');
             }
         } catch (Exception $e) {
             $this->addFlash('error',$e->getMessage());
+            //return $this->redirect($this->generateUrl('intex_org_user_upload'));
             return $this->render('IntexOrgBundle:Page:index.html.twig');
         }
 
         $em->flush();
         $this->addFlash('success', $this->get('translator')->trans('Users successfully loaded'));
         return $this->render('IntexOrgBundle:Page:index.html.twig');
+    }
+
+
+    public function uploadXmlAction()
+    {
+        $form = $this->createFormBuilder()
+            ->add('file','file',array('label' => $this->get('translator')->trans('Load XML file'),
+                "attr" => array("accept" => ".xml",)))
+            ->getForm();
+        return $this->render('IntexOrgBundle:User:upload.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     /**

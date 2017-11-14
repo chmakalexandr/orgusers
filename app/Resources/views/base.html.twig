@@ -18,9 +18,14 @@
         <section id="wrapper">
 
             <header id="header">
+                <div class="language">
+                    <span><a href="{{ path(app.request.attributes.get('_route'), { '_locale': 'ru' }) }}">RU</a></span>&nbsp|
+                    <span><a href="{{ path(app.request.attributes.get('_route'), { '_locale': 'en' }) }}">EN</a></span>
+                </div>
                 <hgroup>
                     <h2>{% block site_title %}<a href="{{ path('intex_org_homepage') }}">{% trans %}Users & Organizations {% endtrans %}</a>{% endblock %}</h2>
                 </hgroup>
+
             </header>
 
             <section class="main-col">
@@ -29,9 +34,9 @@
                 {% block body %}{% endblock %}
             </section>
 
-            <aside class="sidebar">
-                {% block sidebar %}{% endblock %}
-            </aside>
+            {% block sidebar %}
+
+            {% endblock %}
 
             <div id="footer">
                 {% block footer %}

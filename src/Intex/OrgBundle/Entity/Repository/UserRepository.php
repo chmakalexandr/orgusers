@@ -38,21 +38,13 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
      * @param User $user
      * @return bool
      */
-    public function isUniqueUser(User $user)
+    public function isNotUniqueUser(User $user)
     {
         $db = $this->createQueryBuilder('u')
             ->select('u')
             ->where('u.inn = :inn')
             ->setParameter('inn', $user->getInn());
-        $inn= $db->getQuery()->getResult();
-
-        /*8$db = $this->createQueryBuilder('u')
-            ->select('u')
-            ->where('u.snils = :snils')
-            ->setParameter('snils', $user->getSnils());
-        $snils = $db->getQuery()->getResult();
-        */
-
+        $inn = $db->getQuery()->getResult();
 
         return $inn;
     }

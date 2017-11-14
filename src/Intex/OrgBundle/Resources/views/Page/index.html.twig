@@ -1,13 +1,9 @@
-{% extends 'IntexOrgBundle::layout.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css')}}" type="text/css"/>
-    <style type="text/css">
-        .main-col {
-            border-right: 0px;
-        }
-    </style>
+
 {% endblock %}
 
 {% block namepage %}
@@ -51,5 +47,3 @@
     {% endfor %}
 {% endblock %}
 
-{% block sidebar %}
-{% endblock %}

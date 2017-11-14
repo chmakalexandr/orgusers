@@ -36,14 +36,5 @@ class PageController extends Controller
      * Render page for upload users from XML file
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function uploadXmlAction()
-    {
-       $form = $this->createFormBuilder()
-           ->add('file','file',array('label' => $this->get('translator')->trans('Load XML file'),
-                "attr" => array("accept" => ".xml",)))
-           ->getForm();
-       return $this->render('IntexOrgBundle:Page:upload.html.twig', array(
-            'form' => $form->createView()
-       ));
-    }
+
 }
