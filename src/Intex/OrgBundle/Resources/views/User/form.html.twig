@@ -2,7 +2,8 @@
 
 {% block namepage %}
     <h3>
-        {% trans %} Add user to organization {% endtrans %} {{ company.name}}
+        {% trans %} Add user to organization {% endtrans %}
+        <a href="{{ path('intex_org_company_show', {'companyId': company.id}) }}">{{ company.name }}</a>
     </h3>
 {% endblock %}
 
@@ -12,15 +13,4 @@
     <p>
         <input type="submit" value="{% trans %}Submit{% endtrans %}" class="btn btn-default">
     </p>
-
-    <form name="form" method="post" action="/en/load/" class="loadform" enctype="multipart/form-data">
-
-        <div id="form"><div class="form-group">
-                <label class="control-label required" for="form_file">Load XML file</label>
-                <input type="file" id="form_file" name="form[file]" required="required" accept=".xml" /></div>
-            <input type="hidden" id="form__token" name="form[_token]" value="_9mkbwIaaRc4TahiIhIkzF8ScKj7xwT1GHoXsp0Wji8" />
-        </div>
-
-        <input type="submit" value="Upload Document"  class="btn btn-default" id="up_submit" />
-
 {% endblock %}

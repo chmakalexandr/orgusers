@@ -2,7 +2,8 @@
 
 {% block namepage %}
     <h3>
-        {% trans %} Organization Users: {% endtrans %}<a href="{{ path('intex_org_company_show', { 'companyId': company.id }) }}">{{ company.name }} </a>
+        {% trans %}Organization Users{% endtrans %}
+        <a href="{{ path('intex_org_company_show', {'companyId': company.id}) }}">{{ company.name }}</a>
     </h3>
 {% endblock %}
 

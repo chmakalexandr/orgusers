@@ -27,7 +27,7 @@ class UserType extends AbstractType
         $builder->add('lastname','text', array('label' => 'First Name',));
         $builder->add('middlename','text', array('label' => 'Middle Name',));
         $builder->add('bithday', DateType::class, array('label' => 'Bithday(YYYY-MM-DD)',
-            'widget' => 'single_text','format' => 'yyyy-MM-dd',));
+            'widget' => 'single_text','format' => 'yyyy-mm-dd',));
         $builder->add('inn','text',array('label' => 'ITN (12 digits)',));
         $builder->add('snils', 'text',array('label' => 'INILA (11 digits)',));
     }

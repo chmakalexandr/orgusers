@@ -1,81 +1,73 @@
 intex_org_homepage:
-    path:     /
-    defaults: { _controller: IntexOrgBundle:Page:index, _locale: ru }
+    path: /
+    defaults: { _controller: IntexOrgBundle:Page:index, _locale: %locale% }
     requirements:
-             methods:  GET
-             _locale:  %available_langs%
-
+        methods:  GET
+        _locale:  %available_langs%
 
 intex_org_user_show:
-    path:  /user/{userId}
-    defaults: { _controller: IntexOrgBundle:User:showUser, _locale: ru}
+    path: /user/{userId}
+    defaults: { _controller: IntexOrgBundle:User:showUser, _locale: %locale%}
     requirements:
-            methods:  GET
-            userId: \d+
-            _locale:  %available_langs%
-
+        methods:  GET
+        userId:   \d+
+        _locale:  %available_langs%
 
 intex_org_users:
-    path:  /users/
-    defaults: { _controller: IntexOrgBundle:User:listUsers, _locale: ru }
+    path: /users/
+    defaults: { _controller: IntexOrgBundle:User:listUsers, _locale: %locale% }
     requirements:
-           methods:  GET
-           _locale:  %available_langs%
-
+        methods:  GET
+        _locale:  %available_langs%
 
 intex_org_companies:
-    path:  /companies/
-    defaults: { _controller: IntexOrgBundle:Company:listCompanies, _locale: ru }
+    path: /companies/
+    defaults: { _controller: IntexOrgBundle:Company:listCompanies, _locale: %locale% }
     requirements:
-            methods:  GET
-            _locale:  %available_langs%
-
+        methods:  GET
+        _locale:  %available_langs%
 
 intex_org_company_show:
     path: /company/{companyId}
     defaults: { _controller: IntexOrgBundle:Company:showCompany, _locale: %locale% }
     requirements:
-            methods:  GET
-            companyId: \d+
-            _locale:  %available_langs%
-
+        methods:  GET
+        companyId: \d+
+        _locale:  %available_langs%
 
 intex_org_company_users:
     path: /users-company/{companyId}
     defaults: { _controller: IntexOrgBundle:User:listOrgUsers, _locale: %locale% }
     requirements:
-            methods:  GET
-            companyId: \d+
-            _locale:  %available_langs%
-
+        methods:  GET
+        companyId: \d+
+        _locale:  %available_langs%
 
 intex_org_user_new:
-     path: /new-user-in-comp/{companyId}
-     defaults: { _controller: IntexOrgBundle:User:newUser, _locale: %locale% }
-     requirements:
-            methods:  GET
-            companyId: \d+
-            _locale:  %available_langs%
-
+    path: /new-user-in-comp/{companyId}
+    defaults: { _controller: IntexOrgBundle:User:newUser, _locale: %locale% }
+    requirements:
+        methods:  GET
+        companyId: \d+
+        _locale:  %available_langs%
 
 intex_org_user_create:
-      path: /create-user/{companyId}
-      defaults: { _controller: IntexOrgBundle:User:createUser, _locale: %locale% }
-      requirements:
-            methods:  POST
-            companyId: \d+
-            _locale:  %available_langs%
-
+    path: /create-user/{companyId}
+    defaults: { _controller: IntexOrgBundle:User:createUser, _locale: %locale% }
+    requirements:
+        methods:  POST
+        companyId: \d+
+        _locale:  %available_langs%
 
 intex_org_user_upload:
-      path: /upload/
-      defaults: { _controller: IntexOrgBundle:User:uploadXml, _locale: %locale% }
-      requirements:
-            _locale:  %available_langs%
+    path: /upload/
+    defaults: { _controller: IntexOrgBundle:User:uploadXml, _locale: %locale% }
+    requirements:
+        _locale:  %available_langs%
 
 intex_org_user_load:
-      path: /load/
-      defaults: { _controller: IntexOrgBundle:User:loadUsers, _locale: %locale% }
-      requirements:
-            methods:  POST
-            _locale:  %available_langs%
+    path: /load/
+    defaults: { _controller: IntexOrgBundle:User:loadUsers, _locale: %locale% }
+    requirements:
+        methods:  POST
+        _locale:  %available_langs%

@@ -1,5 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{% block languages %}
+    <span><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'_locale': 'ru' }))) }}">RU</a></span>&nbsp|
+    <span><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'_locale': 'en' }))) }}">EN</a></span>
+{% endblock %}
+
 {% block sidebar %}
         <aside class="sidebar">
             <ul class="nav nav-pills nav-stacked">

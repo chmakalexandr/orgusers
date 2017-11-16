@@ -4,11 +4,18 @@
         {% trans %} Upload users from a XML file {% endtrans %}
     </h3>
 {% endblock %}
+
 {% block body %}
-    {{ form_start(form, { 'action': path('intex_org_user_load'), 'method': 'POST', 'attr': {'class': 'loadform'} }) }}
 
-    {{ form_widget(form) }}
-
+     <form name="form" method="post" action="{{ path('intex_org_user_load') }}" class="loadform" enctype="multipart/form-data">
+     <div id="form">
+        <div class="form-group">
+            <label class="control-label required" for="form_file">
+                {% trans %}Load XML file{% endtrans %}
+            </label>
+            <input type="file" id="form_file" name="form[file]" required="required" accept=".xml" />
+        </div>
+     </div>
     <input type="submit" value="{% trans %}Upload Document{% endtrans %}"  class="btn btn-default" id="up_submit" />
 
     {% for error_message in app.session.flashBag.get('error') %}
@@ -22,10 +29,9 @@
             {{ success_message }}
         </div>
     {% endfor %}
-{% endblock %}
 
+{% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript" src="{{ asset('js/check_size.js')}}" />
-
+     <script src="{{ asset('js/check-file-size.js') }}"></script>
 {% endblock %}

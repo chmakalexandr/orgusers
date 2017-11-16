@@ -2,6 +2,7 @@
 
 namespace Intex\OrgBundle\Entity\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Intex\OrgBundle\Entity\User;
 
 /**
@@ -13,39 +14,22 @@ use Intex\OrgBundle\Entity\User;
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * @return array
+     * Return users from array $users that exist in DB
+     * @param \Doctrine\ORM\ArrayCollection $users
+     * @return \Doctrine\ORM\ArrayCollection
      */
-    public function getAllUsers()
+    public function getExistingUsers(ArrayCollection $users)
     {
-        $qb = $this->createQueryBuilder('u')
-            ->select('u')
-            ->addOrderBy('u.lastname', 'ASC');
-      return $qb->getQuery()
-            ->getResult();
-    }
+        $usersInns = array();
+        foreach ($users as $human){
+            $usersInns[] = $human->getInn();
+        }
 
-    public function getAllInn()
-    {
-        $qb = $this->createQueryBuilder('u')
-            ->select('u.inn');
-        return $qb->getQuery()
-            ->getResult();
-    }
-
-
-    /**
-     * Checks if there is user in the database
-     * @param User $user
-     * @return bool
-     */
-    public function isNotUniqueUser(User $user)
-    {
         $db = $this->createQueryBuilder('u')
             ->select('u')
-            ->where('u.inn = :inn')
-            ->setParameter('inn', $user->getInn());
-        $inn = $db->getQuery()->getResult();
+            ->where('u.inn IN (:inns)')
+            ->setParameter('inns', $usersInns);
 
-        return $inn;
+        return $db->getQuery()->getResult();
     }
 }

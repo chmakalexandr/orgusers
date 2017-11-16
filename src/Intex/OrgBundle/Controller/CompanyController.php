@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alex
- * Date: 30.10.2017
- * Time: 13:27
- */
 
 namespace Intex\OrgBundle\Controller;
 
@@ -32,7 +26,7 @@ class CompanyController extends Controller
 
     /**
      * Render information about company by id
-     * @param $companyId
+     * @param int $companyId
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showCompanyAction($companyId)

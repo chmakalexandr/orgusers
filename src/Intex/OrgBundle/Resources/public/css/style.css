@@ -17,8 +17,8 @@ body { line-height: 1;font-family: Arial, sans-serif;font-size: 12px; width: 100
 #header ul.navigation { list-style: none; text-align: right; }
 #header .navigation li { display: inline }
 #header .navigation li a { display: inline-block; padding: 10px 15px; border-left: 1px solid #ccc; }
-#header h2 { font-family: 'Irish Grover', cursive; font-size: 42px; text-align: center; line-height: 70px; }
-#header h2 a { color: #000; }
+#header h2 { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 42px; text-align: center; line-height: 70px; position: relative; top: -20px;}
+#header h2 a { color: #4b7492; }
 #header h3 { text-align: center; font-family: 'La Belle Aurore', cursive; font-size: 32px; margin-bottom: 20px; font-weight: normal; color: #000000; }
 h3{font-size: 24px;}
 .main-col { width: 75%; display: inline-block; float: left; padding: 20px; margin-bottom: 20px; }
@@ -147,6 +147,8 @@ a.thumbnail{
     position: relative;
     top: 5px;
     left: 94%;
+    color: #ffffff !important;
+    z-index: 100;
 }
 .language a{
     color: #ffffff !important;

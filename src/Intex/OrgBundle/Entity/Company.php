@@ -21,7 +21,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     message="This organization is already exist."
  * )
  * @ORM\Table(name="company")
- *
  * @JMS\ExclusionPolicy("all")
  *
  */
@@ -32,43 +31,52 @@ class Company
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
+     * Company name
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
      * @JMS\Expose
      * @JMS\XmlAttribute
      * @JMS\SerializedName("displayName")
+     * @var string
      */
     protected $name;
 
     /**
+     * Primary State Registration Number company's
      * @Assert\NotBlank()
      * @Assert\Regex("/^\d{13}$/")
      * @ORM\Column(type="bigint",unique=true)
      * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\XmlAttribute
+     * @var int
      */
     protected $ogrn;
 
     /**
+     * company number from All-Russian Classifier of Territories of Municipal Units
      * @Assert\NotBlank()
      * @Assert\Regex("/^\d{11}$/")
      * @ORM\Column(type="bigint")
      * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\XmlAttribute
+     * @var int
      */
     protected $oktmo;
 
     /**
+     * Users collection
      * @ORM\OneToMany(targetEntity="User", mappedBy="company")
      * @JMS\Expose
      * @JMS\Type("ArrayCollection<Intex\OrgBundle\Entity\User>")
      * @JMS\XmlList(inline=true, entry="user")
+     * @var \Doctrine\ORM\ArrayCollection
      */
     protected $users;
 
@@ -95,7 +103,7 @@ class Company
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -127,7 +135,7 @@ class Company
     }
 
     /**
-     * @param mixed $ogrn
+     * @param bigint $ogrn
      */
     public function setOgrn($ogrn)
     {
@@ -143,7 +151,7 @@ class Company
     }
 
     /**
-     * @param mixed $oktmo
+     * @param bigint $oktmo
      */
     public function setOktmo($oktmo)
     {

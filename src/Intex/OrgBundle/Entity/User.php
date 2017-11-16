@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alex
- * Date: 30.10.2017
- * Time: 10:56
- */
 
 namespace Intex\OrgBundle\Entity;
 
@@ -17,9 +11,7 @@ use JMS\Serializer\Annotation as JMS;
  *
  * @ORM\Entity(repositoryClass="Intex\OrgBundle\Entity\Repository\UserRepository")
  * @UniqueEntity(
- *     fields={"inn","snils"},
- *     errorPath="snils",
- *     message="This user is already exist."
+ *     fields={"inn","snils"}
  * )
  * @ORM\Table(name="user")
  *
@@ -32,65 +24,80 @@ class User
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
 
     /**
+     * First Name user
      * @Assert\NotBlank()
      * @ORM\Column(type="string",length=100)
      * @JMS\Expose
      * @JMS\XmlAttribute
+     * @var string
      */
     protected $firstname;
 
     /**
+     * Last Name user
      * @Assert\NotBlank()
      * @ORM\Column(type="string",length=100)
      * @JMS\Expose
      * @JMS\XmlAttribute
+     * @var string
      */
     protected $lastname;
 
     /**
+     * Middle Name user
      * @Assert\NotBlank()
      * @ORM\Column(type="string",length=100)
      * @JMS\Expose
      * @JMS\XmlAttribute
+     * @var string
      */
     protected $middlename;
 
     /**
+     * Bithday user
      * @Assert\NotBlank()
      * @ORM\Column(type="date")
      * @JMS\Type("DateTime<'Y-m-d','','|Y-m-d'>")
      * @JMS\Expose
      * @JMS\XmlAttribute
+     * @var \DateTime
      */
     protected $bithday;
 
     /**
+     * Individual Taxpayer Number user's
      * @Assert\NotBlank()
      * @Assert\Regex("/^\d{12}$/")
      * @ORM\Column(type="bigint",unique=true)
      * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\XmlAttribute
+     * @var int
      */
     protected $inn;
 
     /**
+     * Insurance Number of Individual Ledger Account user's
      * @Assert\NotBlank()
      * @Assert\Regex("/^\d{11}$/")
      * @ORM\Column(type="bigint",unique=true)
      * @JMS\Type("string")
      * @JMS\Expose
      * @JMS\XmlAttribute
+     * @var int
      */
     protected $snils;
 
     /**
+     * User's company
      * @ORM\ManyToOne(targetEntity="Company", inversedBy="users")
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
+     * @var \Intex\OrgBundle\Entity\Company
      */
     protected $company;
 
@@ -104,7 +111,7 @@ class User
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -120,7 +127,7 @@ class User
     }
 
     /**
-     * @param mixed $firstname
+     * @param string $firstname
      */
     public function setFirstname($firstname)
     {
@@ -136,7 +143,7 @@ class User
     }
 
     /**
-     * @param mixed $lastname
+     * @param string $lastname
      */
     public function setLastname($lastname)
     {
@@ -152,7 +159,7 @@ class User
     }
 
     /**
-     * @param mixed $middlename
+     * @param string $middlename
      */
     public function setMiddlename($middlename)
     {
@@ -184,7 +191,7 @@ class User
     }
 
     /**
-     * @param mixed $inn
+     * @param bigint $inn
      */
     public function setInn($inn)
     {
@@ -200,7 +207,7 @@ class User
     }
 
     /**
-     * @param mixed $snils
+     * @param bigint $snils
      */
     public function setSnils($snils)
     {

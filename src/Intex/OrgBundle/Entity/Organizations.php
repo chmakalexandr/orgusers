@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alex
- * Date: 03.11.2017
- * Time: 9:05
- */
+
 namespace Intex\OrgBundle\Entity;
 
 use JMS\Serializer\Annotation as JMS;
 
 /**
  * Class Organizations
- *
  * @JMS\XmlRoot("orgs")
  */
 class Organizations
@@ -31,7 +25,7 @@ class Organizations
     }
 
     /**
-     * @param mixed $orgs
+     * @param \Intex\OrgBundle\Entity\Company $companies
      */
     public function setCompanies($companies)
     {

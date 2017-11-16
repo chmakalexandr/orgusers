@@ -2,6 +2,7 @@
 
 namespace Intex\OrgBundle\Entity\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * CompanyRepository
@@ -12,26 +13,22 @@ namespace Intex\OrgBundle\Entity\Repository;
 class CompanyRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * @return array
+     * Return companies from array $companies that exist in DB
+     * @param \Doctrine\ORM\ArrayCollection $companies
+     * @return \Doctrine\ORM\ArrayCollection
      */
-   public function getAllCompanies()
+    public function getExistingCompanies(ArrayCollection $companies)
     {
-        $qb = $this->createQueryBuilder('c')
-            ->select('c')
-            ->addOrderBy('c.name', 'ASC');
-
-        return $qb->getQuery()
-            ->getResult();
-    }
-
-    public function getAllOgrn()
-    {
-        $qb = $this->createQueryBuilder('c')->select('c.ogrn');
-        $result = array();
-        $ogrns = $qb->getQuery()->getResult();
-        foreach ($ogrns as $ogrn){
-            array_push($result,$ogrn['ogrn']) ;
+        $companiesOgrns = array();
+        foreach ($companies as $organization){
+            $companiesOgrns[] = $organization->getOgrn();
         }
-        return $result;
+
+        $db = $this->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.ogrn IN (:ogrns)')
+            ->setParameter('ogrns', $companiesOgrns);
+
+        return $db->getQuery()->getResult();
     }
 }
