@@ -12,6 +12,15 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class CompanyRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getAllCompanies()
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c')
+            ->addOrderBy('c.name', 'ASC');
+        return $qb->getQuery()
+            ->getResult();
+    }
     /**
      * Return companies from array $companies that exist in DB
      * @param \Doctrine\ORM\ArrayCollection $companies
