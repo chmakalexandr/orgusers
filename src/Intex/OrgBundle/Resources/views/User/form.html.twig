@@ -1,4 +1,12 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.css')}}" type="text/css" />
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+{% endblock %}
 
 {% block namepage %}
     <h3>
@@ -13,4 +21,14 @@
     <p>
         <input type="submit" value="{% trans %}Submit{% endtrans %}" class="btn btn-default">
     </p>
+
+    <script type="text/javascript">
+        $("#intex_orgbundle_usertype_bithday").datepicker({format: "yyyy-mm-dd"});
+    </script>
 {% endblock %}
+
+
+
+
+
+

@@ -2,14 +2,11 @@
 
 namespace Intex\OrgBundle\Controller;
 
-use Doctrine\DBAL\Driver\PDOException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Intex\OrgBundle\Entity\User;
 use Intex\OrgBundle\Entity\Company;
 use Intex\OrgBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
-use XMLReader;
-
 
 /**
  * Class UserController
@@ -137,18 +134,12 @@ class UserController extends Controller
         try {
             $xmlFile = $request->files->get('form');
 
-            if (($xmlFile['file']->getError())||(substr($xmlFile['file']->getClientOriginalName(),-4) != ".xml")){
+            /*if (($xmlFile['file']->getError())||(substr($xmlFile['file']->getClientOriginalName(),-4) != ".xml")){
                 $this->addFlash('error', $this->get('translator')->trans('Wrong file'));
-                return $this->render('IntexOrgBundle:User:upload.html.twig');
-            }
-
-            $xmlData = file_get_contents($xmlFile['file']->getRealPath());
-
-            /*if (!simplexml_load_string($xmlData)|| mb_detect_encoding($xmlData)!='UTF-8' ) {
-                $this->addFlash('error', $this->get('translator')->trans('Wrong XML file'));
-                return $this->render('IntexOrgBundle:User:upload.html.twig');
+                return $this->redirect($this->generateUrl('intex_org_user_upload'));
             }
             */
+            $xmlData = file_get_contents($xmlFile['file']->getRealPath());
 
             $data = $this->get('jms_serializer')->deserialize($xmlData, 'Intex\OrgBundle\Entity\Organizations', 'xml');
             $em = $this->getDoctrine()->getManager();
@@ -187,18 +178,18 @@ class UserController extends Controller
                     }
                 } else {
                     $this->addFlash('error', $this->get('translator')->trans('The file contains data about users who are already present in the database. Upload canceled.'));
-                    return $this->render('IntexOrgBundle:User:upload.html.twig');
+                    return $this->redirect($this->generateUrl('intex_org_user_upload'));
+                    //return $this->render('IntexOrgBundle:User:upload.html.twig');
                 }
             }
             $em->flush();
         } catch (\Exception $e) {
-            $this->addFlash('error','Unnable add users in Db. Check XML file');
-            return $this->render('IntexOrgBundle:User:upload.html.twig');
+            $this->addFlash('error',$this->get('translator')->trans('Unnable add users in Db. Check XML file'));
+            return $this->redirect($this->generateUrl('intex_org_user_upload'));
         }
 
-
         $this->addFlash('success', $this->get('translator')->trans('Users successfully loaded'));
-        return $this->render('IntexOrgBundle:Page:index.html.twig');
+        return $this->redirect($this->generateUrl('intex_org_user_upload'));
     }
 
     /**
@@ -207,7 +198,13 @@ class UserController extends Controller
      */
     public function uploadXmlAction()
     {
-        return $this->render('IntexOrgBundle:User:upload.html.twig');
+        $form = $this->createFormBuilder()
+            ->add('file','file',array('label' => $this->get('translator')->trans('Load XML file'),
+                "attr" => array("accept" => ".xml",)))
+            ->getForm();
+        return $this->render('IntexOrgBundle:User:upload.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     /**
@@ -227,8 +224,8 @@ class UserController extends Controller
 
     /**
      * Return company from array $companies in which the Primary State Registration Number = $ogrn
-     * @param ArrayCollection $companies
      * @param int $ogrn
+     * @param ArrayCollection $companies
      * @return \Intex\OrgBundle\Entity\Company|null|object
      */
     protected function getCompanyByOgrn($ogrn, $companies)
