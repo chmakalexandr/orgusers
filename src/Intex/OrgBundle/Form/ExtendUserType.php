@@ -3,26 +3,27 @@
 namespace Intex\OrgBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Intex\OrgBundle\Form\UserType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
-
-class UserType extends AbstractType
+class ExtendUserType extends UserType
 {
     /**
      * {@inheritdoc}
      */
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder->add('firstname','text', array('label' => 'Last Name',));
-        $builder->add('lastname','text', array('label' => 'First Name',));
-        $builder->add('middlename','text', array('label' => 'Middle Name',));
-        $builder->add('bithday', DateType::class, array('label' => 'Bithday(YYYY-MM-DD)',
-            'widget' => 'single_text','format' => 'yyyy-mm-dd','attr'=> array('class'=>'input-group date')));
-        $builder->add('inn','text',array('label' => 'ITN (12 digits)',));
-        $builder->add('snils', 'text',array('label' => 'INILA (11 digits)',));
+        parent::buildForm($builder,$options);
+        $builder->add('company', 'entity', array(
+            'class' => 'Intex\OrgBundle\Entity\Company',
+            'property' => 'name',
+            'placeholder' => 'Choose organization',
+            'required' => true
+        ));
     }
 
     /**
@@ -37,6 +38,6 @@ class UserType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'intex_orgbundle_usertype';
+        return 'intex_orgbundle_newusertype';
     }
 }

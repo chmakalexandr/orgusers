@@ -2,6 +2,7 @@
 
 namespace Intex\OrgBundle\Controller;
 
+use Intex\OrgBundle\Form\ExtendUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Intex\OrgBundle\Entity\User;
 use Intex\OrgBundle\Entity\Company;
@@ -90,6 +91,16 @@ class UserController extends Controller
             'form'   => $form->createView()
         ));
     }
+
+    public function newExtendUserAction()
+    {
+        $user = new User();
+        $form = $this->createForm(ExtendUserType::class, $user);
+        return $this->render('IntexOrgBundle:User:extform.html.twig', array(
+            'form'   => $form->createView()
+        ));
+    }
+
 
     /**
      * Add user in DB

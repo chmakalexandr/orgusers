@@ -71,3 +71,9 @@ intex_org_user_load:
     requirements:
         methods:  POST
         _locale:  %available_langs%
+
+intex_org_user_ext:
+    path: /new/
+    defaults: { _controller: IntexOrgBundle:User:newExtendUser, _locale: %locale% }
+    requirements:
+        _locale:  %available_langs%
