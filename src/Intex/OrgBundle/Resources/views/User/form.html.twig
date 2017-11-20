@@ -1,8 +1,5 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css')}}" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.css')}}" type="text/css" />
+{% block firstjavascripts %}
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
@@ -23,7 +20,7 @@
     </p>
 
     <script type="text/javascript">
-        $("#intex_orgbundle_usertype_bithday").datepicker({format: "yyyy-mm-dd"});
+        $("#intex_orgbundle_usertype_bithday").datepicker({format: "yyyy-mm-dd", startView: 1});
     </script>
 {% endblock %}
 

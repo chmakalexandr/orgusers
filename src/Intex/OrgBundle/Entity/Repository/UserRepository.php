@@ -3,7 +3,6 @@
 namespace Intex\OrgBundle\Entity\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Intex\OrgBundle\Entity\User;
 
 /**
  * UserRepository
@@ -15,8 +14,8 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
      * Return users from array $users that exist in DB
-     * @param \Doctrine\ORM\ArrayCollection $users
-     * @return \Doctrine\ORM\ArrayCollection
+     * @param ArrayCollection $users
+     * @return ArrayCollection
      */
     public function getExistingUsers(ArrayCollection $users)
     {

@@ -26,7 +26,7 @@ class CompanyController extends Controller
 
     /**
      * Render information about company by id
-     * @param int $companyId
+     * @param int $companyId Id organization's
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showCompanyAction($companyId)

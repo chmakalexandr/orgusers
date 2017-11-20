@@ -1,19 +1,11 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Alex
- * Date: 30.10.2017
- * Time: 14:08
- */
-
 namespace Intex\OrgBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-
 
 class UserType extends AbstractType
 {
@@ -23,8 +15,8 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder->add('firstname','text', array('label' => 'Last Name',));
-        $builder->add('lastname','text', array('label' => 'First Name',));
+        $builder->add('lastname','text', array('label' => 'Last Name',));
+        $builder->add('firstname','text', array('label' => 'First Name',));
         $builder->add('middlename','text', array('label' => 'Middle Name',));
         $builder->add('bithday', DateType::class, array('label' => 'Bithday(YYYY-MM-DD)',
             'widget' => 'single_text','format' => 'yyyy-mm-dd','attr'=> array('class'=>'input-group date')));

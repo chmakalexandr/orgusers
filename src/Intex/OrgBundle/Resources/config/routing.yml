@@ -3,7 +3,6 @@ intex_org_homepage:
     defaults: { _controller: IntexOrgBundle:Page:index, _locale: %locale% }
     requirements:
         methods:  GET
-        _locale:  %available_langs%
 
 intex_org_user_show:
     path: /user/{userId}
@@ -11,21 +10,18 @@ intex_org_user_show:
     requirements:
         methods:  GET
         userId:   \d+
-        _locale:  %available_langs%
 
 intex_org_users:
     path: /users/
     defaults: { _controller: IntexOrgBundle:User:listUsers, _locale: %locale% }
     requirements:
         methods:  GET
-        _locale:  %available_langs%
 
 intex_org_companies:
     path: /companies/
     defaults: { _controller: IntexOrgBundle:Company:listCompanies, _locale: %locale% }
     requirements:
         methods:  GET
-        _locale:  %available_langs%
 
 intex_org_company_show:
     path: /company/{companyId}
@@ -33,7 +29,6 @@ intex_org_company_show:
     requirements:
         methods:  GET
         companyId: \d+
-        _locale:  %available_langs%
 
 intex_org_company_users:
     path: /users-company/{companyId}
@@ -41,7 +36,6 @@ intex_org_company_users:
     requirements:
         methods:  GET
         companyId: \d+
-        _locale:  %available_langs%
 
 intex_org_user_new:
     path: /new-user-in-comp/{companyId}
@@ -49,7 +43,6 @@ intex_org_user_new:
     requirements:
         methods:  GET
         companyId: \d+
-        _locale:  %available_langs%
 
 intex_org_user_create:
     path: /create-user/{companyId}
@@ -57,17 +50,14 @@ intex_org_user_create:
     requirements:
         methods:  POST
         companyId: \d+
-        _locale:  %available_langs%
 
 intex_org_user_upload:
     path: /upload/
     defaults: { _controller: IntexOrgBundle:User:uploadXml, _locale: %locale% }
     requirements:
-        _locale:  %available_langs%
 
 intex_org_user_load:
     path: /load/
     defaults: { _controller: IntexOrgBundle:User:loadUsers, _locale: %locale% }
     requirements:
         methods:  POST
-        _locale:  %available_langs%

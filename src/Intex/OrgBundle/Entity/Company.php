@@ -27,6 +27,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Company
 {
     /**
+     * Id company
      * @Assert\NotBlank()
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -76,7 +77,7 @@ class Company
      * @JMS\Expose
      * @JMS\Type("ArrayCollection<Intex\OrgBundle\Entity\User>")
      * @JMS\XmlList(inline=true, entry="user")
-     * @var \Doctrine\ORM\ArrayCollection
+     * @var ArrayCollection
      */
     protected $users;
 
@@ -85,11 +86,18 @@ class Company
         $this->users = new ArrayCollection();
     }
 
+
+    /**
+     * @param User $user
+     */
     public function addUser(User $user)
     {
         $this->users[] = $user;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getUsers()
     {
         return $this->users;
@@ -119,7 +127,7 @@ class Company
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name)
     {
@@ -135,7 +143,7 @@ class Company
     }
 
     /**
-     * @param bigint $ogrn
+     * @param int $ogrn
      */
     public function setOgrn($ogrn)
     {
@@ -151,7 +159,7 @@ class Company
     }
 
     /**
-     * @param bigint $oktmo
+     * @param int $oktmo
      */
     public function setOktmo($oktmo)
     {

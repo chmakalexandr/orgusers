@@ -40,4 +40,10 @@ Action: Действие
 Actions: Действия
 There are no users: Нет пользователей
 There are no companies: Нет организаций
-Unnable add users in Db. Check XML file : Невозможно добавить пользователей в БД. Прверьте XML-файл.
+Unnable add users in Db. Check XML file : Невозможно добавить пользователей в БД. Проверьте XML-файл.
+Access forbidden: Доступ запрещен
+Return to the home page: Вернитесь на домашнюю страницу
+The requested page was not found. Check for typos in the URL or: Запрашиваемая страница не найдена. Проверьте наличие опечаток в URL-адресе или
+An error occurred: Произошла ошибка
+An exception occurred: Произошло исключение
+Choose organization: Выбрать организацию

@@ -24,11 +24,13 @@
             <tbody>
                 {% for user in users %}
                     <tr>
-                        <td scope="row">{{ loop.index }}</td><td>{{ user.lastname }}</td>
-                        <td>{{ user.firstname }}</td><td>{{ user.middlename }}</td>
+                        <td scope="row">{{ loop.index }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.middlename }}</td>
                         <td>
                             <a href="{{ path('intex_org_user_show', { 'userId': user.id }) }}" title="{% trans %}Show user info{% endtrans %}">
-                               <i class="fa fa-list" aria-hidden="true"></i>
+                                <i class="fa fa-address-card" aria-hidden="true"></i>
                             </a>
                         </td>
                     </tr>

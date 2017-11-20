@@ -3,10 +3,10 @@
 namespace Intex\OrgBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Intex\OrgBundle\Entity\User;
 use Intex\OrgBundle\Entity\Company;
 use Intex\OrgBundle\Form\UserType;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class UserController
@@ -33,7 +33,7 @@ class UserController extends Controller
 
     /**
      * Render information about user by id
-     * @param int $userId
+     * @param int $userId Id user's
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showUserAction($userId)
@@ -46,13 +46,13 @@ class UserController extends Controller
         }
 
         return $this->render('IntexOrgBundle:User:show.html.twig', array(
-            'user'      => $user,
+            'user' => $user,
         ));
     }
 
     /**
-     * Renders list company users
-     * @param int $companyId
+     * Renders list users of the company
+     * @param int $companyId Id organization's
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listOrgUsersAction($companyId)
@@ -71,10 +71,10 @@ class UserController extends Controller
     }
 
     /**
-     * Renders form for add user to company
-     * @param int $companyId
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
+    * Renders form for add user to company
+    * @param int $companyId
+    * @return \Symfony\Component\HttpFoundation\Response
+    */
     public function newUserAction($companyId)
     {
         $company = $this->getCompany($companyId);
@@ -84,7 +84,6 @@ class UserController extends Controller
         $user = new User();
         $user->setCompany($company);
         $form = $this->createForm(UserType::class, $user);
-
         return $this->render('IntexOrgBundle:User:form.html.twig', array(
             'company' => $company,
             'form'   => $form->createView()
@@ -105,10 +104,8 @@ class UserController extends Controller
         }
         $user = new User();
         $user->setCompany($company);
-
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isValid()&&$form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -117,7 +114,6 @@ class UserController extends Controller
             $users = $company->getUsers();
             return $this->redirect($this->generateUrl('intex_org_company_users',array('companyId'=>$companyId,'company'=>$company,'users'=>$users)));
         }
-
         return $this->render('IntexOrgBundle:User:form.html.twig', array(
             'company' => $company,
             'form' => $form->createView()
@@ -133,17 +129,10 @@ class UserController extends Controller
     {
         try {
             $xmlFile = $request->files->get('form');
-
-            /*if (($xmlFile['file']->getError())||(substr($xmlFile['file']->getClientOriginalName(),-4) != ".xml")){
-                $this->addFlash('error', $this->get('translator')->trans('Wrong file'));
-                return $this->redirect($this->generateUrl('intex_org_user_upload'));
-            }
-            */
             $xmlData = file_get_contents($xmlFile['file']->getRealPath());
-
             $data = $this->get('jms_serializer')->deserialize($xmlData, 'Intex\OrgBundle\Entity\Organizations', 'xml');
-            $em = $this->getDoctrine()->getManager();
             $companies = $data->getCompanies();
+            $em = $this->getDoctrine()->getManager();
 
             $existingCompanies = $em->getRepository('Intex\OrgBundle\Entity\Company')->getExistingCompanies($companies);
 
@@ -179,7 +168,6 @@ class UserController extends Controller
                 } else {
                     $this->addFlash('error', $this->get('translator')->trans('The file contains data about users who are already present in the database. Upload canceled.'));
                     return $this->redirect($this->generateUrl('intex_org_user_upload'));
-                    //return $this->render('IntexOrgBundle:User:upload.html.twig');
                 }
             }
             $em->flush();
@@ -187,7 +175,6 @@ class UserController extends Controller
             $this->addFlash('error',$this->get('translator')->trans('Unnable add users in Db. Check XML file'));
             return $this->redirect($this->generateUrl('intex_org_user_upload'));
         }
-
         $this->addFlash('success', $this->get('translator')->trans('Users successfully loaded'));
         return $this->redirect($this->generateUrl('intex_org_user_upload'));
     }
@@ -209,7 +196,7 @@ class UserController extends Controller
 
     /**
      * Shows the company in which the user belongs
-     * @param int $companyId
+     * @param int $companyId Id organization's
      * @return \Intex\OrgBundle\Entity\Company|null|object
      */
     protected function getCompany($companyId)
@@ -224,8 +211,8 @@ class UserController extends Controller
 
     /**
      * Return company from array $companies in which the Primary State Registration Number = $ogrn
-     * @param int $ogrn
-     * @param ArrayCollection $companies
+     * @param int $ogrn Primary State Registration Number organization's
+     * @param array $companies array organizations
      * @return \Intex\OrgBundle\Entity\Company|null|object
      */
     protected function getCompanyByOgrn($ogrn, $companies)
@@ -233,7 +220,7 @@ class UserController extends Controller
         $organization = null;
         foreach ($companies as $company){
             if ($company->getOgrn() == $ogrn){
-                $organization = $company;
+                return $organization = $company;
             }
         }
         return $organization;

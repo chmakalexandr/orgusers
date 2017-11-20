@@ -1,9 +1,5 @@
 {% extends 'IntexOrgBundle::layout.html.twig' %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css')}}" type="text/css"/>
 
-{% endblock %}
 {% block namepage %}
     <h3>
         {% trans %} Organizations {% endtrans %}
@@ -22,22 +18,22 @@
             </tr>
             </thead>
             <tbody>
-                {% for company in companies %}
-                    <tr>
-                        <td scope="row">{{ loop.index }}</td>
-                        <td>{{ company.name }} </td>
-                        <td>
-                            <a href="{{  path('intex_org_user_new',{ 'companyId': company.id })}}" title="{% trans %}Add user{% endtrans %}">
-                                <i class="fa fa-user-plus" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{{  path('intex_org_company_show', { 'companyId': company.id })}}" title="{% trans %}Show company info{% endtrans %}">
-                                <i class="fa fa-list" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
+            {% for company in companies %}
+                <tr>
+                    <td scope="row">{{ loop.index }}</td>
+                    <td>{{ company.name }} </td>
+                    <td>
+                        <a href="{{ path('intex_org_user_new',{ 'companyId': company.id })}}" title="{% trans %}Add user{% endtrans %}">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{  path('intex_org_company_show', { 'companyId': company.id })}}" title="{% trans %}Show company info{% endtrans %}">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% else %}

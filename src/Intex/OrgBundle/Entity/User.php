@@ -14,13 +14,13 @@ use JMS\Serializer\Annotation as JMS;
  *     fields={"inn","snils"}
  * )
  * @ORM\Table(name="user")
- *
  * @JMS\ExclusionPolicy("all")
  *
  */
 class User
 {
     /**
+     * Id user
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -175,7 +175,7 @@ class User
     }
 
     /**
-     * @param mixed $bithday
+     * @param \DateTime $bithday
      */
     public function setBithday($bithday)
     {
@@ -191,7 +191,7 @@ class User
     }
 
     /**
-     * @param bigint $inn
+     * @param int $inn
      */
     public function setInn($inn)
     {
@@ -207,7 +207,7 @@ class User
     }
 
     /**
-     * @param bigint $snils
+     * @param int $snils
      */
     public function setSnils($snils)
     {
@@ -216,21 +216,17 @@ class User
 
     /**
      * Set company
-     *
      * @param \Intex\OrgBundle\Entity\Company $company
-     *
      * @return User
      */
     public function setCompany(\Intex\OrgBundle\Entity\Company $company = null)
     {
         $this->company = $company;
-
         return $this;
     }
 
     /**
      * Get company
-     *
      * @return \Intex\OrgBundle\Entity\Company
      */
     public function getCompany()

@@ -13,7 +13,7 @@ $('#up_submit').click( function() {
         var file_name = $('#form_file')[0].files[0].name;
         var file_type = file_name.split('.').pop().toLowerCase();
         if(file_type!="xml"){
-            alert("Допускаются файлы только файлы xml");
+            alert("Для загрузки допускаются только XML-файлы");
             return false;
         }
 
