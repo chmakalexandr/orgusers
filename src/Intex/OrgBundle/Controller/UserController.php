@@ -72,7 +72,7 @@ class UserController extends Controller
 
     /**
     * Renders form for add user to company
-    * @param int $companyId
+    * @param int $companyId organization's Id
     * @return \Symfony\Component\HttpFoundation\Response
     */
     public function newUserAction($companyId)
@@ -93,7 +93,7 @@ class UserController extends Controller
     /**
      * Add user in DB
      * @param Request $request
-     * @param int $companyId
+     * @param int $companyId organization's Id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createUserAction(Request $request, $companyId)
