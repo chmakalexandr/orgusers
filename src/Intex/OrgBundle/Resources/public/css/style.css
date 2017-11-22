@@ -22,7 +22,7 @@ body { line-height: 1;font-family: Arial, sans-serif;font-size: 12px; width: 100
 #header h3 { text-align: center; font-family: 'La Belle Aurore', cursive; font-size: 32px; margin-bottom: 20px; font-weight: normal; color: #000000; }
 h3{font-size: 24px;}
 .main-col { width: 75%; display: inline-block; float: left; padding: 20px; margin-bottom: 20px; }
-.sidebar { width: 25%; ; display: inline-block; }
+.sidebar { width: 25%; ; display: inline-block; border-left: 1px solid #ccc;}
 
 .main-col a { color: #F48A00; }
 .main-col h1,
@@ -40,7 +40,6 @@ h3{font-size: 24px;}
     background-color: #dcdcdc;
     padding: 2px;
 }
-
 .users .row :nth-child(even) a{
     background-color: #dcdcdc;
 
@@ -49,34 +48,27 @@ h3{font-size: 24px;}
     background-color: #aaaaaa;
     padding: 2px;
 }
-
 #header{
     height: 220px;
     background: url("../images/org-header.jpg")  no-repeat;
     background-size: 100% 100%;
 }
-
 .table.table-striped.table-hover tr{
 }
-
 .table{
     border: 1px solid #ccc;
 }
-
 .table th{
     background-color: #dde4e7;
     cursor: default;
 }
-
 .table-striped > tbody > tr:nth-of-type(2n+1){
     background-color: #f3e6ac;
 }
 .table-hover>tbody>tr:hover{background-color:#dfc551}
-
 .name-col{
     background-color: #fcf6da;
 }
-
 .sidebar li{
     border-bottom: 1px solid #ccc;
     margin: 0 10px;
@@ -88,27 +80,20 @@ h3{font-size: 24px;}
 .sidebar li:last-child{
     border-bottom: 0;
 }
-.sidebar {
-    border-left: 1px solid #ccc;
-}
 .nav{
     font-weight: bolder;
 }
-
 .main-col h3{
     margin-bottom: 20px;
 }
-
 .alert{
     margin-top: 20px;
 }
-
 .list-group{
     height: 90%;
     line-height: 90%;
     text-align: center;
 }
-
 .list-group-horizontal .list-group-item {
     display: inline-block;
 }
@@ -129,7 +114,6 @@ h3{font-size: 24px;}
     float: left;
     padding: 5px ;
 }
-
 .userform{
     margin: 0 20%;
     width: 60%;
@@ -137,16 +121,14 @@ h3{font-size: 24px;}
 .userform .btn{
     width: 100%;
 }
-
 a.thumbnail{
     text-align: center;
     padding-top: 15%;
 }
-
 .language{
-    position: absolute;
+    position: relative;
     top: 5px;
-    right: 190px;
+    padding-left: 930px;
     color: #ffffff !important;
     z-index: 100;
 }

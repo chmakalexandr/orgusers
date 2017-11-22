@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Intex\OrgBundle\Entity\User;
 use Intex\OrgBundle\Entity\Company;
 use Intex\OrgBundle\Form\UserType;
+use Exception;
 
 /**
  * Class UserController
@@ -130,6 +131,7 @@ class UserController extends Controller
         try {
             $xmlFile = $request->files->get('form');
             $xmlData = file_get_contents($xmlFile['file']->getRealPath());
+
             $data = $this->get('jms_serializer')->deserialize($xmlData, 'Intex\OrgBundle\Entity\Organizations', 'xml');
             $companies = $data->getCompanies();
             $em = $this->getDoctrine()->getManager();
@@ -141,7 +143,7 @@ class UserController extends Controller
                 $existingOgrns[] = $organization->getOgrn();
             }
 
-            foreach ($companies as $organization){
+            foreach ($companies as $organization) {
                 if (!in_array($organization->getOgrn(), $existingOgrns)) {
                     $company = new Company();
                     $company->setName($organization->getName());
@@ -153,26 +155,20 @@ class UserController extends Controller
                 }
 
                 $users = $organization->getUsers();
-                if(!$em->getRepository('Intex\OrgBundle\Entity\User')->getExistingUsers($users)){
-                    foreach ($users as $human) {
-                        $user = New User();
+                $newUsers = $em->getRepository('Intex\OrgBundle\Entity\User')->getNoExistingUsers($users);
+                if ($newUsers){
+                    foreach ($newUsers as $user) {
                         $user->setCompany($company);
-                        $user->setFirstname($human->getFirstName());
-                        $user->setMiddlename($human->getMiddlename());
-                        $user->setLastname($human->getLastName());
-                        $user->setSnils($human->getSnils());
-                        $user->setInn($human->getInn());
-                        $user->setBithday($human->getBithday());
                         $em->persist($user);
                     }
                 } else {
-                    $this->addFlash('error', $this->get('translator')->trans('The file contains data about users who are already present in the database. Upload canceled.'));
+                    $this->addFlash('success',$this->get('translator')->trans('All uploadable users are present in DB'));
                     return $this->redirect($this->generateUrl('intex_org_user_upload'));
                 }
             }
             $em->flush();
-        } catch (\Exception $e) {
-            $this->addFlash('error',$this->get('translator')->trans('Unnable add users in Db. Check XML file'));
+        } catch (Exception $e) {
+            $this->addFlash('error',$this->get('translator')->trans('Unnable add users in Db. Check XML file.'));
             return $this->redirect($this->generateUrl('intex_org_user_upload'));
         }
         $this->addFlash('success', $this->get('translator')->trans('Users successfully loaded'));

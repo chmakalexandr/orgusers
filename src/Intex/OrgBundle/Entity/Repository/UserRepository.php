@@ -17,7 +17,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
      * @param ArrayCollection $users
      * @return ArrayCollection
      */
-    public function getExistingUsers(ArrayCollection $users)
+    public function getNoExistingUsers(ArrayCollection $users)
     {
         $usersInns = array();
         foreach ($users as $human){
@@ -25,10 +25,25 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         }
 
         $db = $this->createQueryBuilder('u')
-            ->select('u')
+            ->select('u.inn')
             ->where('u.inn IN (:inns)')
             ->setParameter('inns', $usersInns);
+        $getExistingInn = $db->getQuery()->getResult();
 
-        return $db->getQuery()->getResult();
+        foreach ($getExistingInn as $inn){
+            $inns[] = $inn['inn'];
+        }
+
+        $newInns = array_diff($usersInns, $inns);
+        $newUsers = array();
+        if ($newInns) {
+            foreach ($users as $human) {
+                if (in_array($human->getInn(), $newInns)){
+                    $newUsers[] = $human;
+                }
+            }
+        }
+
+        return $newUsers;
     }
 }

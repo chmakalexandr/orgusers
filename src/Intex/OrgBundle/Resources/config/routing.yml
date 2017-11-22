@@ -54,7 +54,7 @@ intex_org_user_create:
 intex_org_user_upload:
     path: /upload/
     defaults: { _controller: IntexOrgBundle:User:uploadXml, _locale: %locale% }
-    requirements:
+
 
 intex_org_user_load:
     path: /load/

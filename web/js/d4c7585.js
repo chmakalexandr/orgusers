@@ -16,8 +16,7 @@ $('#up_submit').click( function() {
         {
            alert((fsize/1048576).toFixed(1) +" Mb\nToo big file!");
            return false;
-        } else if (fsize == 0)
-        {
+        } else if (fsize == 0){
             alert("Blank file!");
             return false;
         }
@@ -48,8 +47,7 @@ $('#up_submit').click( function() {
         {
            alert((fsize/1048576).toFixed(1) +" Mb\nToo big file!");
            return false;
-        } else if (fsize == 0)
-        {
+        } else if (fsize == 0){
             alert("Blank file!");
             return false;
         }
